@@ -1,4 +1,5 @@
-﻿using MerrMail.Maui.Models;
+﻿using CommunityToolkit.Maui;
+using MerrMail.Maui.Models;
 using MerrMail.Maui.Services;
 using MerrMail.Maui.ViewModels;
 using MerrMail.Maui.Views;
@@ -12,6 +13,7 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .UseMauiCommunityToolkit()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -19,11 +21,11 @@ public static class MauiProgram
             });
 
 #if DEBUG
-		builder.Logging.AddDebug();
+        builder.Logging.AddDebug();
 #endif
 
-        builder.Services.AddSingleton<IEmailContextService, EmailContextService>();
         builder.Services.AddSingleton<ISettings, Settings>();
+        builder.Services.AddSingleton<IEmailContextService, EmailContextService>();
         builder.Services.AddSingleton<EmailContextsViewModel>();
         builder.Services.AddSingleton<EmailContextsPage>();
         builder.Services.AddSingleton<HomeViewModel>();

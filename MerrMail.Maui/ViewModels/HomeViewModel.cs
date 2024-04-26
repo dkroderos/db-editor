@@ -9,8 +9,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MerrMail.Maui.ViewModels;
-public partial class HomeViewModel(ISettings settings) : BaseViewModel
+public partial class HomeViewModel : BaseViewModel
 {
+    private readonly ISettings settings;
+
+    public HomeViewModel(ISettings settings)
+    {
+        this.settings = settings;
+    }
+
     [RelayCommand]
     private async Task GoToEmailContextsAsync()
     {

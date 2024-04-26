@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MerrMail.Maui.Models;
-
-public interface ISettings
+namespace MerrMail.Maui.ViewModels;
+public class CreateEmailContextViewModel
 {
-    string? Path { get; set; }
 }

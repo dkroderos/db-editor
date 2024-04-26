@@ -13,4 +13,11 @@ public partial class EmailContextsPage : ContentPage
         this.emailContextsViewModel = emailContextsViewModel;
         BindingContext = this.emailContextsViewModel;
     }
+
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        base.OnNavigatedTo(args);
+
+        emailContextsViewModel.GetEmailContextsCommand.ExecuteAsync(this);
+    }
 }

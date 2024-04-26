@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MerrMail.Maui.Services;
+
 public interface IEmailContextService
 {
     Task<EmailContext> GetAsync(int id);

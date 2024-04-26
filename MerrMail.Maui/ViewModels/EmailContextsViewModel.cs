@@ -3,6 +3,7 @@ using System.Diagnostics;
 using CommunityToolkit.Mvvm.Input;
 using MerrMail.Maui.Models;
 using MerrMail.Maui.Services;
+using MerrMail.Maui.Views;
 
 namespace MerrMail.Maui.ViewModels;
 
@@ -37,5 +38,11 @@ public partial class EmailContextsViewModel(IEmailContextService emailContextSer
         {
             IsBusy = false;
         }
+    }
+
+    [RelayCommand]
+    public async Task GoToCreateEmailContextAsync()
+    {
+        await Shell.Current.GoToAsync($"{nameof(CreateEmailContextPage)}");
     }
 }

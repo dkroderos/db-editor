@@ -28,11 +28,11 @@
                             <Label
                                 Grid.Column="3"
                                 HorizontalTextAlignment="Center"
-                                Text="DateCreated" />
+                                Text="Date Created" />
                             <Label
                                 Grid.Column="4"
                                 HorizontalTextAlignment="Center"
-                                Text="LastUpdated" />
+                                Text="Last Updated" />
                             <Label
                                 Grid.Column="5"
                                 HorizontalTextAlignment="Center"
@@ -77,5 +77,8 @@
                 </CollectionView>
             </StackLayout>
         </ScrollView>
+        <Grid Grid.Row="1" Padding="10">
+            <Button Command="{Binding GoToCreateEmailContextCommand}" Text="Create Neuron Permit" />
+        </Grid>
     </Grid>
 </ContentPage>

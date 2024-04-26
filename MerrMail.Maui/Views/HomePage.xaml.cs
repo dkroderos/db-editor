@@ -5,6 +5,7 @@ namespace MerrMail.Maui.Views;
 public partial class HomePage : ContentPage
 {
 	private readonly HomeViewModel homeViewModel;
+
 	public HomePage(HomeViewModel homeViewModel)
 	{
 		InitializeComponent();

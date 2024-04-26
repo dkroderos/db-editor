@@ -8,5 +8,5 @@ namespace MerrMail.Maui.Models;
 
 public class Settings : ISettings
 {
-    public required string Path { get; set; }
+    public string? Path { get; set; }
 }

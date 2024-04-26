@@ -1,4 +1,5 @@
 ﻿using MerrMail.Maui.Models;
+using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,34 @@ using System.Threading.Tasks;
 
 namespace MerrMail.Maui.Services;
 
-public class EmailContextService(ISettings settings) : IEmailContextService
+public class EmailContextService : IEmailContextService
 {
-    public Task AddAsync(EmailContext emailContext)
+    private readonly ISettings settings;
+
+    public EmailContextService(ISettings settings)
     {
-        throw new NotImplementedException();
+        this.settings = settings;
+    }
+
+    public async Task AddAsync(EmailContext emailContext)
+    {
+        var connectionString = $@"Data Source=file:{settings.Path}";
+
+        using var connection = new SqliteConnection(connectionString);
+        await connection.OpenAsync();
+
+        var query = "INSERT INTO EmailContext (Subject, Response, DateCreated, LastUpdated, Editor) " +
+            "VALUES (@Subject, @Response, @DateCreated, @LastUpdated, @Editor)";
+
+        using var command = new SqliteCommand(query, connection);
+
+        command.Parameters.AddWithValue("@Subject", emailContext.Subject);
+        command.Parameters.AddWithValue("@Response", emailContext.Response);
+        command.Parameters.AddWithValue("@DateCreated", emailContext.DateCreated);
+        command.Parameters.AddWithValue("@LastUpdated", emailContext.LastUpdated);
+        command.Parameters.AddWithValue("@Editor", emailContext.Editor);
+
+        await command.ExecuteNonQueryAsync();
     }
 
     public Task DeleteAsync(int id)
@@ -24,9 +48,33 @@ public class EmailContextService(ISettings settings) : IEmailContextService
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<EmailContext>> GetAllAsync()
+    public async Task<IEnumerable<EmailContext>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        var connectionString = $@"Data Source=file:{settings.Path}";
+        var emailContexts = new List<EmailContext>();
+
+        using var connection = new SqliteConnection(connectionString);
+        await connection.OpenAsync();
+
+        using var command = new SqliteCommand($"SELECT * FROM EmailContext", connection);
+        using var reader = await command.ExecuteReaderAsync();
+
+        while (await reader.ReadAsync())
+        {
+            var emailContext = new EmailContext
+            {
+                Id = reader.GetInt32(0),
+                Subject = reader.GetString(1),
+                Response = reader.GetString(2),
+                DateCreated = reader.GetString(3),
+                LastUpdated = reader.GetString(4),
+                Editor = reader.GetString(5),
+            };
+
+            emailContexts.Add(emailContext);
+        }
+
+        return emailContexts;
     }
 
     public Task<EmailContext> GetAsync(int id)

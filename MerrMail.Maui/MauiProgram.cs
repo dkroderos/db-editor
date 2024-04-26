@@ -30,6 +30,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<EmailContextsPage>();
         builder.Services.AddSingleton<HomeViewModel>();
         builder.Services.AddSingleton<HomePage>();
+        builder.Services.AddSingleton<CreateEmailContextViewModel>();
+        builder.Services.AddSingleton<CreateEmailContextPage>();
 
         return builder.Build();
     }

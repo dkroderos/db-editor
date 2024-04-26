@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace MerrMail.Maui.ViewModels;
 
@@ -12,4 +13,10 @@ public partial class BaseViewModel : ObservableObject
     private string _title = string.Empty;
 
     public bool IsNotBusy => !IsBusy;
+
+    [RelayCommand]
+    public async Task GoBackAsync()
+    {
+        await Shell.Current.GoToAsync("..");
+    }
 }

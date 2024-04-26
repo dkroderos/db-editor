@@ -78,7 +78,7 @@
             </StackLayout>
         </ScrollView>
         <Grid Grid.Row="1" Padding="10">
-            <Button Command="{Binding GoToCreateEmailContextCommand}" Text="Create Neuron Permit" />
+            <Button Command="{Binding GoToCreateEmailContextCommand}" Text="Create Email Context" />
         </Grid>
     </Grid>
 </ContentPage>

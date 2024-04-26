@@ -1,12 +1,57 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MerrMail.Maui.Views.CreateEmailContextPage"
-             Title="CreateEmailContextPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage
+    x:Class="MerrMail.Maui.Views.CreateEmailContextPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:MerrMail.Maui.ViewModels"
+    Title="CreateEmailContextPage"
+    x:DataType="viewmodels:CreateEmailContextViewModel">
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
+            <StackLayout>
+                <Grid Margin="10" ColumnDefinitions="Auto,*">
+                    <Label
+                        Grid.Column="0"
+                        Text="Subject: "
+                        VerticalOptions="Center" />
+                    <Entry Grid.Column="1" Text="{Binding Subject}" />
+                </Grid>
+                <Grid Margin="10" ColumnDefinitions="Auto,*">
+                    <Label
+                        Grid.Column="0"
+                        Text="Response: "
+                        VerticalOptions="Center" />
+                    <Editor
+                        Grid.Column="1"
+                        HeightRequest="200"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding Response}" />
+                </Grid>
+                <Grid Margin="10" ColumnDefinitions="Auto,*">
+                    <Label
+                        Grid.Column="0"
+                        Text="Name: "
+                        VerticalOptions="Center" />
+                    <Entry Grid.Column="1" Text="{Binding Name}" />
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+        <Grid
+            Grid.Row="1"
+            Padding="10"
+            ColumnDefinitions="*,*"
+            HorizontalOptions="FillAndExpand">
+            <Button
+                Grid.Column="0"
+                Margin="0,0,6,0"
+                Command="{Binding GoBackCommand}"
+                Text="Cancel" />
+
+            <Button
+                Grid.Column="1"
+                Margin="3,0,3,0"
+                Command="{Binding CreateEmailContextCommand}"
+                Text="Create" />
+        </Grid>
+    </Grid>
 </ContentPage>

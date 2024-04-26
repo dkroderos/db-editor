@@ -16,4 +16,8 @@
         Title="Email Contexts"
         ContentTemplate="{DataTemplate views:EmailContextsPage}"
         Route="EmailContextsPage" />
+    <ShellContent
+        Title="Create Email Context"
+        ContentTemplate="{DataTemplate views:CreateEmailContextPage}"
+        Route="CreateEmailContextPage" />
 </Shell>

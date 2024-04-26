@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MerrMail.Maui.Views.EditEmailContextPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:MerrMail.Maui.ViewModels"
+    Title="EditEmailContextPage"
+    x:DataType="viewmodels:EditEmailContextViewModel">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding GoBackCommand}" />
+    </Shell.BackButtonBehavior>
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
+            <StackLayout>
+                <Grid Margin="10" ColumnDefinitions="Auto,*">
+                    <Label
+                        Grid.Column="0"
+                        Text="Id: "
+                        VerticalOptions="Center" />
+                    <Entry
+                        Grid.Column="1"
+                        IsReadOnly="True"
+                        Text="{Binding Id}" />
+                </Grid>
+                <Grid Margin="10" ColumnDefinitions="Auto,*">
+                    <Label
+                        Grid.Column="0"
+                        Text="Subject: "
+                        VerticalOptions="Center" />
+                    <Entry
+                        Grid.Column="1"
+                        HorizontalOptions="Fill"
+                        Text="{Binding Subject}" />
+                </Grid>
+                <Grid Margin="10" ColumnDefinitions="Auto,*">
+                    <Label
+                        Grid.Column="0"
+                        Text="Response: "
+                        VerticalOptions="Center" />
+                    <Entry Grid.Column="1" Text="{Binding Response}" />
+                </Grid>
+                <Grid Margin="10" ColumnDefinitions="Auto,*">
+                    <Label
+                        Grid.Column="0"
+                        Text="Date Created: "
+                        VerticalOptions="Center" />
+                    <Entry
+                        Grid.Column="1"
+                        IsReadOnly="True"
+                        Text="{Binding DateCreated}" />
+                </Grid>
+                <Grid Margin="10" ColumnDefinitions="Auto,*">
+                    <Label
+                        Grid.Column="0"
+                        Text="Last Updated: "
+                        VerticalOptions="Center" />
+                    <Entry
+                        Grid.Column="1"
+                        IsReadOnly="True"
+                        Text="{Binding LastUpdated}" />
+                </Grid>
+                <Grid Margin="10" ColumnDefinitions="Auto,*">
+                    <Label
+                        Grid.Column="0"
+                        Text="Last Updated: "
+                        VerticalOptions="Center" />
+                    <Entry Grid.Column="1" Text="{Binding Editor}" />
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+        <Grid
+            Grid.Row="1"
+            Padding="10"
+            ColumnDefinitions="*,*"
+            HorizontalOptions="FillAndExpand">
+            <Button
+                Grid.Column="0"
+                Margin="0,0,6,0"
+                Command="{Binding GoBackCommand}"
+                Text="Cancel" />
+
+            <Button
+                Grid.Column="1"
+                Margin="3,0,3,0"
+                Command="{Binding EditEmailContextCommand}"
+                Text="Edit" />
+        </Grid>
+
+    </Grid>
+</ContentPage>

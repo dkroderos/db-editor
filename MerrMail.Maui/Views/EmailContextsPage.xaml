@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    x:Class="MerrMail.Maui.Views.EmailContextsPage"
+    x:DataType="viewmodels:EmailContextsViewModel"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:models="clr-namespace:MerrMail.Maui.Models"
+    xmlns:viewmodels="clr-namespace:MerrMail.Maui.ViewModels"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ContentPage.Content>
+        <Grid RowDefinitions="*,Auto">
+            <ScrollView>
+                <StackLayout>
+                    <CollectionView ItemsSource="{Binding EmailContexts}">
+                        <CollectionView.Header>
+                            <Grid ColumnDefinitions="*,*,*,*,*" Padding="10">
+                                <Label
+                                    Grid.Column="0"
+                                    HorizontalTextAlignment="Center"
+                                    Text="Subject" />
+                                <Label
+                                    Grid.Column="1"
+                                    HorizontalTextAlignment="Center"
+                                    Text="Response" />
+                            </Grid>
+                        </CollectionView.Header>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:EmailContext">
+                                <Frame Margin="2" Padding="5">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding}" />
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                                <Grid ColumnDefinitions="*,*,*,*,*" Padding="10">
+                                    <Label
+                                        Grid.Column="0"
+                                        HorizontalTextAlignment="Center"
+                                        Text="{Binding Subject}" />
+                                    <Label
+                                        Grid.Column="1"
+                                        HorizontalTextAlignment="Center"
+                                        Text="{Binding Response}" />
+                                    <Label
+                                        Grid.Column="2"
+                                        HorizontalTextAlignment="Center"
+                                        Text="{Binding DateCreated}" />
+                                    <Label
+                                        Grid.Column="3"
+                                        HorizontalTextAlignment="Center"
+                                        Text="{Binding LastUpdated}" />
+                                    <Label
+                                        Grid.Column="4"
+                                        HorizontalTextAlignment="Center"
+                                        Text="{Binding Editor}" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

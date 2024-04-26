@@ -8,8 +8,12 @@
     Shell.FlyoutBehavior="Disabled">
 
     <ShellContent
+        Title="MerrMail Database Editor"
+        ContentTemplate="{DataTemplate views:HomePage}"
+        Route="HomePage"
+        Shell.FlyoutBehavior="Disabled" />
+    <ShellContent
         Title="Email Contexts"
         ContentTemplate="{DataTemplate views:EmailContextsPage}"
         Route="EmailContextsPage" />
-
 </Shell>

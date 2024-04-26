@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MerrMail.Maui.Views.HomePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:MerrMail.Maui.ViewModels"
+    Title="MerrMail Database Editor"
+    x:DataType="viewmodels:HomeViewModel">
+
+    <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Grid
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="All"
+            ColumnDefinitions="*,*"
+            RowDefinitions="2*,*">
+
+            <Label
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                FontAttributes="Bold"
+                FontSize="50"
+                HorizontalOptions="Center"
+                Text="MerrMail Database Editor"
+                VerticalOptions="Center" />
+
+            <Button
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="20,20,10,20"
+                Command="{Binding}"
+                CornerRadius="30"
+                Text="New" />
+            <Button
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="10,20,20,20"
+                Command="{Binding GoToEmailContextsCommand}"
+                CornerRadius="30"
+                Text="Edit" />
+        </Grid>
+
+        <StackLayout
+            Padding="12"
+            AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            IsVisible="{Binding IsBusy}">
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" />
+
+        </StackLayout>
+    </AbsoluteLayout>
+</ContentPage>

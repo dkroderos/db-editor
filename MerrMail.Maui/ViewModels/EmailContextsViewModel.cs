@@ -2,10 +2,11 @@
 using System.Diagnostics;
 using CommunityToolkit.Mvvm.Input;
 using MerrMail.Maui.Models;
+using MerrMail.Maui.Services;
 
 namespace MerrMail.Maui.ViewModels;
 
-public partial class EmailContextsViewModel : BaseViewModel
+public partial class EmailContextsViewModel(IEmailContextService emailContextService) : BaseViewModel
 {
     public ObservableCollection<EmailContext> EmailContexts { get; } = [];
 
@@ -20,7 +21,7 @@ public partial class EmailContextsViewModel : BaseViewModel
             IsBusy = true;
 
             EmailContexts.Clear();
-            var emailContexts = new List<EmailContext>();
+            var emailContexts = await emailContextService.GetAllAsync();
 
             foreach (var emailContext in emailContexts)
             {

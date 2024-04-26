@@ -8,8 +8,6 @@ public partial class App : Application
     {
         InitializeComponent();
 
-        Routing.RegisterRoute(nameof(EmailContextsPage), typeof(EmailContextsPage));
-
         MainPage = new AppShell();
     }
 }

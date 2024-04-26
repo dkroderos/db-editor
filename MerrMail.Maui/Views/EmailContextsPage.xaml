@@ -43,7 +43,7 @@
                         <DataTemplate x:DataType="models:EmailContext">
                             <Frame Margin="2" Padding="5">
                                 <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:EmailContextsViewModel}}, Path=GoToEditEmailContextCommand}" CommandParameter="{Binding .}" />
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:EmailContextsViewModel}}, Path=GoToEmailContextDetailsCommand}" CommandParameter="{Binding .}" />
                                 </Frame.GestureRecognizers>
                                 <Grid Padding="10" ColumnDefinitions="*,*,*,*,*,*">
                                     <Label

@@ -9,7 +9,7 @@ namespace MerrMail.Maui.Services;
 
 public interface IEmailContextService
 {
-    Task<EmailContext> GetAsync(int id);
+    Task<EmailContext?> GetAsync(int id);
     Task<IEnumerable<EmailContext>> GetAllAsync();
     Task AddAsync(EmailContext emailContext);
     Task RemoveAsync(int id);

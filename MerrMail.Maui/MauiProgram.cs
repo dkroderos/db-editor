@@ -26,6 +26,7 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<ISettings, Settings>();
         builder.Services.AddSingleton<IEmailContextService, EmailContextService>();
+
         builder.Services.AddSingleton<EmailContextsViewModel>();
         builder.Services.AddSingleton<EmailContextsPage>();
 

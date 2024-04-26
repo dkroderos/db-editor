@@ -55,7 +55,22 @@ public class EmailContextService : IEmailContextService
 
     public async Task EditAsync(EmailContext emailContext)
     {
-        throw new NotImplementedException();
+        var connectionString = $@"Data Source=file:{settings.Path}";
+
+        using var connection = new SqliteConnection(connectionString);
+        await connection.OpenAsync();
+
+        var query = "UPDATE EmailContext SET Subject = @Subject, Response = @Response, DateCreated = @DateCreated, LastUpdated = @LastUpdated, Editor = @Editor WHERE Id = @Id";
+        var command = new SqliteCommand(query, connection);
+
+        command.Parameters.AddWithValue("@Id", emailContext.Id);
+        command.Parameters.AddWithValue("@Subject", emailContext.Subject);
+        command.Parameters.AddWithValue("@Response", emailContext.Response);
+        command.Parameters.AddWithValue("@DateCreated", emailContext.DateCreated);
+        command.Parameters.AddWithValue("@LastUpdated", DateTime.Now.ToString());
+        command.Parameters.AddWithValue("@Editor", emailContext.Editor);
+
+        await command.ExecuteNonQueryAsync();
     }
 
     public async Task<IEnumerable<EmailContext>> GetAllAsync()
@@ -66,7 +81,8 @@ public class EmailContextService : IEmailContextService
         using var connection = new SqliteConnection(connectionString);
         await connection.OpenAsync();
 
-        using var command = new SqliteCommand($"SELECT * FROM EmailContext", connection);
+        var query = $"SELECT * FROM EmailContext";
+        using var command = new SqliteCommand(query, connection);
         using var reader = await command.ExecuteReaderAsync();
 
         while (await reader.ReadAsync())
@@ -87,8 +103,35 @@ public class EmailContextService : IEmailContextService
         return emailContexts;
     }
 
-    public Task<EmailContext> GetAsync(int id)
+    public async Task<EmailContext?> GetAsync(int id)
     {
-        throw new NotImplementedException();
+        var connectionString = $@"Data Source=file:{settings.Path}";
+
+        using var connection = new SqliteConnection(connectionString);
+        await connection.OpenAsync();
+
+        var query = "SELECT * FROM EmailContext WHERE Id = @Id";
+        using var command = new SqliteCommand(query, connection);
+
+        command.Parameters.AddWithValue("@Id", id);
+
+        using var reader = await command.ExecuteReaderAsync();
+
+        while (await reader.ReadAsync())
+        {
+            var emailContext = new EmailContext
+            {
+                Id = reader.GetInt32(0),
+                Subject = reader.GetString(1),
+                Response = reader.GetString(2),
+                DateCreated = reader.GetString(3),
+                LastUpdated = reader.GetString(4),
+                Editor = reader.GetString(5),
+            };
+
+            return emailContext;
+        }
+
+        return null;
     }
 }

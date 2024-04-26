@@ -21,7 +21,13 @@ public partial class EmailContextDetailsViewModel(IEmailContextService emailCont
     [RelayCommand]
     public async Task GoToEditEmailContextAsync()
     {
-        await Shell.Current.GoToAsync($"{nameof(EditEmailContextPage)}");
+        if (EmailContext is null || IsBusy) return;
+
+        await Shell.Current.GoToAsync($"{nameof(EditEmailContextPage)}",
+            new Dictionary<string, object>
+            {
+                { "EmailContext", EmailContext! },
+            });
     }
 
     [RelayCommand]

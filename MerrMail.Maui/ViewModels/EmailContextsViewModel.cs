@@ -47,7 +47,7 @@ public partial class EmailContextsViewModel(IEmailContextService emailContextSer
     }
 
     [RelayCommand]
-    public async Task GoToEditEmailContextAsync(EmailContext emailContext)
+    public async Task GoToEmailContextDetailsAsync(EmailContext emailContext)
     {
         await Shell.Current.GoToAsync($"{nameof(EmailContextDetailsPage)}",
             new Dictionary<string, object>

@@ -13,4 +13,11 @@ public partial class EditEmailContextPage : ContentPage
         this.editEmailContextViewModel = editEmailContextViewModel;
         BindingContext = this.editEmailContextViewModel;
     }
+
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        base.OnNavigatedTo(args);
+
+        editEmailContextViewModel.GetEmailContextCommand.ExecuteAsync(this);
+    }
 }

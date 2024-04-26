@@ -28,10 +28,18 @@ public static class MauiProgram
         builder.Services.AddSingleton<IEmailContextService, EmailContextService>();
         builder.Services.AddSingleton<EmailContextsViewModel>();
         builder.Services.AddSingleton<EmailContextsPage>();
+
         builder.Services.AddSingleton<HomeViewModel>();
         builder.Services.AddSingleton<HomePage>();
+
         builder.Services.AddSingleton<CreateEmailContextViewModel>();
         builder.Services.AddSingleton<CreateEmailContextPage>();
+
+        builder.Services.AddSingleton<EditEmailContextViewModel>();
+        builder.Services.AddSingleton<EditEmailContextPage>();
+
+        builder.Services.AddSingleton<EmailContextDetailsViewModel>();
+        builder.Services.AddSingleton<EmailContextDetailsPage>();
 
         return builder.Build();
     }

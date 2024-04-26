@@ -8,6 +8,8 @@ public partial class AppShell : Shell
     {
         Routing.RegisterRoute(nameof(EmailContextsPage), typeof(EmailContextsPage));
         Routing.RegisterRoute(nameof(CreateEmailContextPage), typeof(CreateEmailContextPage));
+        Routing.RegisterRoute(nameof(EditEmailContextPage), typeof(EditEmailContextPage));
+        Routing.RegisterRoute(nameof(EmailContextDetailsPage), typeof(EmailContextDetailsPage));
 
         InitializeComponent();
     }

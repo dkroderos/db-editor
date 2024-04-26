@@ -69,6 +69,12 @@
 	  <MauiXaml Update="Views\CreateEmailContextPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\EditEmailContextPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\EmailContextDetailsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\EmailContextsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

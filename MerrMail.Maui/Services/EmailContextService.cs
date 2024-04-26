@@ -38,12 +38,22 @@ public class EmailContextService : IEmailContextService
         await command.ExecuteNonQueryAsync();
     }
 
-    public Task DeleteAsync(int id)
+    public async Task RemoveAsync(int id)
     {
-        throw new NotImplementedException();
+        var connectionString = $@"Data Source=file:{settings.Path}";
+
+        using var connection = new SqliteConnection(connectionString);
+        await connection.OpenAsync();
+
+        var query = "DELETE FROM EmailContext WHERE Id = @Id";
+        using var command = new SqliteCommand(query, connection);
+
+        command.Parameters.AddWithValue("@Id", id);
+
+        await command.ExecuteNonQueryAsync();
     }
 
-    public Task EditAsync(EmailContext emailContext)
+    public async Task EditAsync(EmailContext emailContext)
     {
         throw new NotImplementedException();
     }

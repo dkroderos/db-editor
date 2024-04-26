@@ -12,6 +12,6 @@ public interface IEmailContextService
     Task<EmailContext> GetAsync(int id);
     Task<IEnumerable<EmailContext>> GetAllAsync();
     Task AddAsync(EmailContext emailContext);
-    Task DeleteAsync(int id);
+    Task RemoveAsync(int id);
     Task EditAsync(EmailContext emailContext);
 }

@@ -13,11 +13,22 @@
         Route="HomePage"
         Shell.FlyoutBehavior="Disabled" />
     <ShellContent
+        Title="Edit Email Context"
+        ContentTemplate="{DataTemplate views:EditEmailContextPage}"
+        FlyoutItemIsVisible="False"
+        Route="EditEmailContextPage" />
+    <ShellContent
+        Title="Email Context Details"
+        ContentTemplate="{DataTemplate views:EmailContextDetailsPage}"
+        FlyoutItemIsVisible="False"
+        Route="EmailContextDetailsPage" />
+    <ShellContent
         Title="Email Contexts"
         ContentTemplate="{DataTemplate views:EmailContextsPage}"
         Route="EmailContextsPage" />
     <ShellContent
         Title="Create Email Context"
         ContentTemplate="{DataTemplate views:CreateEmailContextPage}"
+        FlyoutItemIsVisible="False"
         Route="CreateEmailContextPage" />
 </Shell>

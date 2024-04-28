@@ -42,6 +42,9 @@ public static class MauiProgram
         builder.Services.AddSingleton<EmailContextDetailsViewModel>();
         builder.Services.AddSingleton<EmailContextDetailsPage>();
 
+        builder.Services.AddSingleton<PasswordViewModel>();
+        builder.Services.AddSingleton<PasswordPage>();
+
         return builder.Build();
     }
 }

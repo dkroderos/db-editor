@@ -41,7 +41,7 @@ public partial class HomeViewModel : BaseViewModel
 
             settings.Path = file.FullPath;
 
-            await Shell.Current.GoToAsync($"//{nameof(EmailContextsPage)}");
+            await Shell.Current.GoToAsync($"{nameof(PasswordPage)}");
         }
         catch (Exception ex)
         {

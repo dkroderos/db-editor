@@ -37,7 +37,7 @@
                         Grid.Column="0"
                         Text="Response: "
                         VerticalOptions="Center" />
-                    <Entry Grid.Column="1" Text="{Binding Response}" />
+                    <Editor Grid.Column="1" IsTextPredictionEnabled="False" Text="{Binding Response}" />
                 </Grid>
                 <Grid Margin="10" ColumnDefinitions="Auto,*">
                     <Label

@@ -18,6 +18,11 @@
         FlyoutItemIsVisible="False"
         Route="EditEmailContextPage" />
     <ShellContent
+        Title="Enter Your Password"
+        ContentTemplate="{DataTemplate views:PasswordPage}"
+        FlyoutItemIsVisible="False"
+        Route="PasswordPage" />
+    <ShellContent
         Title="Email Context Details"
         ContentTemplate="{DataTemplate views:EmailContextDetailsPage}"
         FlyoutItemIsVisible="False"

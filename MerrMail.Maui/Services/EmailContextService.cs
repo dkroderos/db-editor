@@ -134,4 +134,25 @@ public class EmailContextService : IEmailContextService
 
         return null;
     }
+
+    public async Task<string?> GetPasswordAsync()
+    {
+        var connectionString = $@"Data Source=file:{settings.Path}";
+
+        using var connection = new SqliteConnection(connectionString);
+        await connection.OpenAsync();
+
+        var query = "SELECT Password FROM Password";
+        using var command = new SqliteCommand(query, connection);
+
+        using var reader = await command.ExecuteReaderAsync();
+
+        while (await reader.ReadAsync())
+        {
+            var password = reader.GetString(0);
+            return password;
+        }
+
+        return null;
+    }
 }

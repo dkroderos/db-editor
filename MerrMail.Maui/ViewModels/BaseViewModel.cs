@@ -20,4 +20,10 @@ public partial class BaseViewModel : ObservableObject
     {
         await Shell.Current.GoToAsync($"//{nameof(EmailContextsPage)}");
     }
+
+    [RelayCommand]
+    public async Task GoHomeAsync()
+    {
+        await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+    }
 }

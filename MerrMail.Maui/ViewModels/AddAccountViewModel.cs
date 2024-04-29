@@ -99,7 +99,7 @@ public partial class AddAccountViewModel(IEmailContextService emailContextServic
         catch (Exception ex)
         {
             Debug.WriteLine(ex);
-            await Shell.Current.DisplayAlert("Error", $"Unable to get email context: {ex.Message}", "Ok");
+            await Shell.Current.DisplayAlert("Error", $"Unable to add email account: {ex.Message}", "Ok");
         }
         finally
         {

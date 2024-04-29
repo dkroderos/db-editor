@@ -13,8 +13,9 @@
         Route="HomePage"
         Shell.FlyoutBehavior="Disabled" />
     <ShellContent
-        Title="Home"
+        Title="Add Account"
         ContentTemplate="{DataTemplate views:AddAccountPage}"
+        FlyoutItemIsVisible="False"
         Route="AddAccountPage"
         Shell.FlyoutBehavior="Disabled" />
     <ShellContent

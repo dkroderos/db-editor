@@ -6,6 +6,7 @@ using MerrMail.Maui.Views;
 using Microsoft.Extensions.Logging;
 
 namespace MerrMail.Maui;
+
 public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()

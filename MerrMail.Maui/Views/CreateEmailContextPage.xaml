@@ -32,7 +32,20 @@
                         Grid.Column="0"
                         Text="Name: "
                         VerticalOptions="Center" />
-                    <Entry Grid.Column="1" Text="{Binding Name}" />
+                    <Entry
+                        Grid.Column="1"
+                        IsReadOnly="True"
+                        Text="{Binding Name}" />
+                </Grid>
+                <Grid Margin="10" ColumnDefinitions="Auto,*">
+                    <Label
+                        Grid.Column="0"
+                        Text="Password: "
+                        VerticalOptions="Center" />
+                    <Entry
+                        Grid.Column="1"
+                        IsPassword="True"
+                        Text="{Binding Password}" />
                 </Grid>
             </StackLayout>
         </ScrollView>

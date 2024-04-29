@@ -37,7 +37,10 @@
                         Grid.Column="0"
                         Text="Response: "
                         VerticalOptions="Center" />
-                    <Editor Grid.Column="1" IsTextPredictionEnabled="False" Text="{Binding Response}" />
+                    <Editor
+                        Grid.Column="1"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding Response}" />
                 </Grid>
                 <Grid Margin="10" ColumnDefinitions="Auto,*">
                     <Label
@@ -64,7 +67,20 @@
                         Grid.Column="0"
                         Text="Last Updated: "
                         VerticalOptions="Center" />
-                    <Entry Grid.Column="1" Text="{Binding Editor}" />
+                    <Entry
+                        Grid.Column="1"
+                        IsReadOnly="True"
+                        Text="{Binding Editor}" />
+                </Grid>
+                <Grid Margin="10" ColumnDefinitions="Auto,*">
+                    <Label
+                        Grid.Column="0"
+                        Text="Password: "
+                        VerticalOptions="Center" />
+                    <Entry
+                        Grid.Column="1"
+                        IsPassword="True"
+                        Text="{Binding Password}" />
                 </Grid>
             </StackLayout>
         </ScrollView>

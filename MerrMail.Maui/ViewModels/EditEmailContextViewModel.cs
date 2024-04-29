@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace MerrMail.Maui.ViewModels;
 
 [QueryProperty(nameof(EmailContext), "EmailContext")]
-public partial class EditEmailContextViewModel(IEmailContextService emailContextService) : BaseViewModel
+public partial class EditEmailContextViewModel(IAccountService accountService, IEmailContextService emailContextService) : BaseViewModel
 {
     [ObservableProperty]
     private EmailContext? emailContext;
@@ -35,6 +35,9 @@ public partial class EditEmailContextViewModel(IEmailContextService emailContext
 
     [ObservableProperty]
     public string? editor;
+
+    [ObservableProperty]
+    public string? password;
 
     [RelayCommand]
     public async Task GetEmailContextAsync()
@@ -97,6 +100,14 @@ public partial class EditEmailContextViewModel(IEmailContextService emailContext
             return;
         }
 
+        if (string.IsNullOrEmpty(Password))
+        {
+            await Shell.Current.CurrentPage.DisplayAlert("Error",
+                "Password cannot be empty",
+                "Ok");
+            return;
+        }
+
         bool isConfirmed = await Shell.Current.CurrentPage.DisplayAlert("Are you sure?",
             "Are you sure you want to edit this new Email Context?",
             "Yes", "No");
@@ -107,6 +118,25 @@ public partial class EditEmailContextViewModel(IEmailContextService emailContext
         try
         {
             IsBusy = true;
+
+            var accounts = await accountService.GetAllAsync();
+            var account = accounts.Where(a => a.Name == Editor).FirstOrDefault();
+
+            if (account is null)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Error",
+                    "Account not found",
+                    "Ok");
+                return;
+            }
+
+            if (account.Password != Password)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Error",
+                    "Incorrect password",
+                    "Ok");
+                return;
+            }
 
             var emailContext = new EmailContext
             {

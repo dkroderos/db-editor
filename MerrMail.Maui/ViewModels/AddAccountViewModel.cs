@@ -55,6 +55,13 @@ public partial class AddAccountViewModel(IEmailContextService emailContextServic
             return;
         }
 
+        bool isConfirmed = await Shell.Current.CurrentPage.DisplayAlert("Are you sure?",
+            "Are you sure you want to create this new Account?",
+            "Yes", "No");
+
+        if (!isConfirmed)
+            return;
+
         try
         {
             IsBusy = true;

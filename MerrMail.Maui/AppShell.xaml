@@ -13,6 +13,11 @@
         Route="HomePage"
         Shell.FlyoutBehavior="Disabled" />
     <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate views:AddAccountPage}"
+        Route="AddAccountPage"
+        Shell.FlyoutBehavior="Disabled" />
+    <ShellContent
         Title="Edit Email Context"
         ContentTemplate="{DataTemplate views:EditEmailContextPage}"
         FlyoutItemIsVisible="False"

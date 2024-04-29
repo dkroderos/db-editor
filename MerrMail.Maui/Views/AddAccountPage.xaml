@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MerrMail.Maui.Views.AddAccountPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:MerrMail.Maui.ViewModels"
+    Title="AddAccountPage"
+    x:DataType="viewmodels:AddAccountViewModel"
+    Shell.FlyoutItemIsVisible="False">
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
+            <StackLayout>
+                <Grid Margin="10" ColumnDefinitions="Auto,*">
+                    <Label
+                        Grid.Column="0"
+                        Text="Name: "
+                        VerticalOptions="Center" />
+                    <Entry Grid.Column="1" Text="{Binding Name}" />
+                </Grid>
+                <Grid Margin="10" ColumnDefinitions="Auto,*">
+                    <Label
+                        Grid.Column="0"
+                        Text="Password: "
+                        VerticalOptions="Center" />
+                    <Entry
+                        Grid.Column="1"
+                        IsPassword="True"
+                        Text="{Binding Password}" />
+                </Grid>
+                <Grid Margin="10" ColumnDefinitions="Auto,*">
+                    <Label
+                        Grid.Column="0"
+                        Text="Repeat Password: "
+                        VerticalOptions="Center" />
+                    <Entry
+                        Grid.Column="1"
+                        IsPassword="True"
+                        Text="{Binding RepeatPassword}" />
+                </Grid>
+                <Grid Margin="10" ColumnDefinitions="Auto,*">
+                    <Label
+                        Grid.Column="0"
+                        Text="Database Password: "
+                        VerticalOptions="Center" />
+                    <Entry
+                        Grid.Column="1"
+                        IsPassword="True"
+                        Text="{Binding DatabasePassword}" />
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+        <Grid
+            Grid.Row="1"
+            Padding="10"
+            ColumnDefinitions="*,*"
+            HorizontalOptions="FillAndExpand">
+            <Button
+                Grid.Column="0"
+                Margin="0,0,6,0"
+                Command="{Binding GoBackCommand}"
+                Text="Cancel" />
+
+            <Button
+                Grid.Column="1"
+                Margin="3,0,3,0"
+                Command="{Binding AddAccountCommand}"
+                Text="Add" />
+        </Grid>
+    </Grid>
+</ContentPage>

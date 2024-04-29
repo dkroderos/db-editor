@@ -59,6 +59,37 @@ public partial class HomeViewModel : BaseViewModel
     }
 
     [RelayCommand]
+    private async Task GoToAddAccountAsync()
+    {
+        if (IsBusy) return;
+
+        try
+        {
+            IsBusy = true;
+
+            var database = await SecureStorage.Default.GetAsync("database");
+
+            if (string.IsNullOrWhiteSpace(database))
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Error",
+                    $"No database set", "Ok");
+                return;
+            }
+
+            await Shell.Current.GoToAsync($"{nameof(AddAccountPage)}");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            await Shell.Current.DisplayAlert("Error", $"Unable to add account: {ex.Message}", "Ok");
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
+
+    [RelayCommand]
     private async Task GoToEmailContextsAsync()
     {
         if (IsBusy) return;

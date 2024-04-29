@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MerrMail.Maui.ViewModels;
+
 public partial class AddAccountViewModel(IEmailContextService emailContextService, IAccountService accountService) : BaseViewModel
 {
     [ObservableProperty]

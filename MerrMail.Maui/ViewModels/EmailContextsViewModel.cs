@@ -55,4 +55,14 @@ public partial class EmailContextsViewModel(IEmailContextService emailContextSer
                 { "EmailContext", emailContext },
             });
     }
+
+    [RelayCommand]
+    public async Task GoToEditEmailContextAsync(EmailContext emailContext)
+    {
+        await Shell.Current.GoToAsync($"{nameof(EditEmailContextPage)}",
+            new Dictionary<string, object>
+            {
+                { "EmailContext", emailContext },
+            });
+    }
 }

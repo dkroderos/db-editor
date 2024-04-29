@@ -5,12 +5,61 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:models="clr-namespace:MerrMail.Maui.Models"
     xmlns:viewmodels="clr-namespace:MerrMail.Maui.ViewModels"
-    Title="EmailContextsPage"
-    x:DataType="viewmodels:EmailContextsViewModel">
+    x:DataType="viewmodels:EmailContextsViewModel"
+    BackgroundColor="{StaticResource Crust}"
+    Shell.NavBarIsVisible="False">
     <Grid RowDefinitions="*,Auto">
-        <ScrollView>
-            <StackLayout>
+        <ScrollView Grid.Row="0">
+            <StackLayout Margin="10,0">
+                <Label
+                    Margin="0,0,0,30"
+                    FontAttributes="Bold"
+                    FontSize="60"
+                    Text="Email Contexts"
+                    TextColor="{StaticResource Text}" />
                 <CollectionView ItemsSource="{Binding EmailContexts}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:EmailContext">
+                            <Frame
+                                Margin="2"
+                                Padding="2"
+                                BackgroundColor="{StaticResource Mantle}">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:EmailContextsViewModel}}, Path=GoToEditEmailContextCommand}" CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
+
+                                <Grid RowDefinitions="*,*">
+                                    <HorizontalStackLayout Grid.Row="0">
+                                        <Label
+                                            Margin="0,0,10,0"
+                                            FontSize="20"
+                                            Text="Subject:"
+                                            TextColor="{StaticResource Text}" />
+                                        <Label
+                                            Margin="0,0,10,0"
+                                            FontSize="20"
+                                            Text="{Binding Subject}"
+                                            TextColor="{StaticResource Subtext1}" />
+                                    </HorizontalStackLayout>
+                                    <VerticalStackLayout Grid.Row="1">
+                                        <Label
+                                            Margin="0,0,10,0"
+                                            FontSize="20"
+                                            Text="Response:"
+                                            TextColor="{StaticResource Text}" />
+                                        <Label
+                                            Margin="0,0,10,0"
+                                            FontSize="20"
+                                            LineBreakMode="WordWrap"
+                                            Text="{Binding Response}"
+                                            TextColor="{StaticResource Subtext1}" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <!--<CollectionView ItemsSource="{Binding EmailContexts}">
                     <CollectionView.Header>
                         <Grid Padding="10" ColumnDefinitions="*,*,*,*,*,*">
                             <Label
@@ -43,7 +92,7 @@
                         <DataTemplate x:DataType="models:EmailContext">
                             <Frame Margin="2" Padding="5">
                                 <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:EmailContextsViewModel}}, Path=GoToEmailContextDetailsCommand}" CommandParameter="{Binding .}" />
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:EmailContextsViewModel}}, Path=GoToEditEmailContextCommand}" CommandParameter="{Binding .}" />
                                 </Frame.GestureRecognizers>
                                 <Grid Padding="10" ColumnDefinitions="*,*,*,*,*,*">
                                     <Label
@@ -74,11 +123,34 @@
                             </Frame>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
-                </CollectionView>
+                </CollectionView>-->
             </StackLayout>
         </ScrollView>
-        <Grid Grid.Row="1" Padding="10">
-            <Button Command="{Binding GoToCreateEmailContextCommand}" Text="Create Email Context" />
+        <Grid
+            Grid.Row="1"
+            Padding="10"
+            BackgroundColor="{StaticResource Base}"
+            ColumnDefinitions="*,*"
+            HorizontalOptions="FillAndExpand">
+            <Button
+                Grid.Column="0"
+                Margin="0,0,6,0"
+                BackgroundColor="{StaticResource Blue}"
+                Command="{Binding GoHomeCommand}"
+                CornerRadius="25"
+                FontSize="30"
+                Text="Cancel"
+                TextColor="{StaticResource Base}" />
+
+            <Button
+                Grid.Column="1"
+                Margin="6,0,0,0"
+                BackgroundColor="{StaticResource Green}"
+                Command="{Binding GoToCreateEmailContextCommand}"
+                CornerRadius="25"
+                FontSize="30"
+                Text="Create Email Context"
+                TextColor="{StaticResource Base}" />
         </Grid>
     </Grid>
 </ContentPage>

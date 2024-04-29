@@ -22,13 +22,18 @@
                 HorizontalOptions="Center"
                 Text="MerrMail Database Editor"
                 VerticalOptions="Center" />
-            <Button
-                Grid.Row="1"
-                Grid.Column="1"
-                Margin="10,20,20,20"
-                Command="{Binding GoToEmailContextsCommand}"
-                CornerRadius="30"
-                Text="Edit" />
+            <StackLayout Grid.Row="1">
+                <Button
+                    Margin="10,20,20,20"
+                    Command="{Binding SetDatabaseCommand}"
+                    CornerRadius="30"
+                    Text="Set Database" />
+                <Button
+                    Margin="10,20,20,20"
+                    Command="{Binding GoToEmailContextsCommand}"
+                    CornerRadius="30"
+                    Text="Edit" />
+            </StackLayout>
         </Grid>
 
         <StackLayout

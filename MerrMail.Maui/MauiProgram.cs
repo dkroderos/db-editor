@@ -24,6 +24,8 @@ public static class MauiProgram
         builder.Logging.AddDebug();
 #endif
 
+        builder.Services.AddSingleton<Account>();
+
         builder.Services.AddSingleton<ISettings, Settings>();
         builder.Services.AddSingleton<IEmailContextService, EmailContextService>();
 

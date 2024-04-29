@@ -9,17 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MerrMail.Maui.ViewModels;
+
 public partial class HomeViewModel : BaseViewModel
 {
-    private readonly ISettings settings;
-
-    public HomeViewModel(ISettings settings)
-    {
-        this.settings = settings;
-    }
-
     [RelayCommand]
-    private async Task GoToEmailContextsAsync()
+    private async Task SetDatabaseAsync()
     {
         if (IsBusy) return;
 
@@ -39,9 +33,50 @@ public partial class HomeViewModel : BaseViewModel
                 return;
             }
 
-            settings.Path = file.FullPath;
+            if (!file.FileName.EndsWith("db", StringComparison.OrdinalIgnoreCase))
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Invalid File!",
+                    $"File chosen is not a database file", "OK");
+                return;
+            }
 
-            await Shell.Current.GoToAsync($"{nameof(PasswordPage)}");
+            await SecureStorage.Default.SetAsync("database", file.FullPath);
+
+            var database = await SecureStorage.Default.GetAsync("database");
+
+            await Shell.Current.CurrentPage.DisplayAlert("Success",
+                $"Database set to: {database}", "Ok");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            await Shell.Current.DisplayAlert("Error", $"Unable to edit email contexts {ex.Message}", "Ok");
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
+
+    [RelayCommand]
+    private async Task GoToEmailContextsAsync()
+    {
+        if (IsBusy) return;
+
+        try
+        {
+            IsBusy = true;
+
+            var database = await SecureStorage.Default.GetAsync("database");
+
+            if (string.IsNullOrWhiteSpace(database))
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Error",
+                    $"No database set", "Ok");
+                return;
+            }
+
+            await Shell.Current.GoToAsync($"{nameof(EmailContextsPage)}");
         }
         catch (Exception ex)
         {

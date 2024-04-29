@@ -154,7 +154,7 @@ public partial class EditEmailContextViewModel(IAccountService accountService, I
                 "Email Context successfully edited",
                 "Ok");
 
-            await Shell.Current.GoToAsync($"//{nameof(EmailContextsPage)}");
+            await Shell.Current.GoToAsync($"..");
         }
         catch (Exception ex)
         {

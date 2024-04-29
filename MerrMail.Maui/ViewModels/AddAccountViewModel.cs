@@ -95,7 +95,7 @@ public partial class AddAccountViewModel(IEmailContextService emailContextServic
             await accountService.AddAsync(account);
             await Shell.Current.DisplayAlert("Success", $"Account created", "Ok");
 
-            await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+            await Shell.Current.GoToAsync($"..");
         }
         catch (Exception ex)
         {

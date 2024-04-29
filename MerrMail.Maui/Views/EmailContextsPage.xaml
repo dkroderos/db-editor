@@ -59,84 +59,19 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-                <!--<CollectionView ItemsSource="{Binding EmailContexts}">
-                    <CollectionView.Header>
-                        <Grid Padding="10" ColumnDefinitions="*,*,*,*,*,*">
-                            <Label
-                                Grid.Column="0"
-                                HorizontalTextAlignment="Center"
-                                Text="Id" />
-                            <Label
-                                Grid.Column="1"
-                                HorizontalTextAlignment="Center"
-                                Text="Subject" />
-                            <Label
-                                Grid.Column="2"
-                                HorizontalTextAlignment="Center"
-                                Text="Response" />
-                            <Label
-                                Grid.Column="3"
-                                HorizontalTextAlignment="Center"
-                                Text="Date Created" />
-                            <Label
-                                Grid.Column="4"
-                                HorizontalTextAlignment="Center"
-                                Text="Last Updated" />
-                            <Label
-                                Grid.Column="5"
-                                HorizontalTextAlignment="Center"
-                                Text="Editor" />
-                        </Grid>
-                    </CollectionView.Header>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:EmailContext">
-                            <Frame Margin="2" Padding="5">
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:EmailContextsViewModel}}, Path=GoToEditEmailContextCommand}" CommandParameter="{Binding .}" />
-                                </Frame.GestureRecognizers>
-                                <Grid Padding="10" ColumnDefinitions="*,*,*,*,*,*">
-                                    <Label
-                                        Grid.Column="0"
-                                        HorizontalTextAlignment="Center"
-                                        Text="{Binding Id}" />
-                                    <Label
-                                        Grid.Column="1"
-                                        HorizontalTextAlignment="Center"
-                                        Text="{Binding Subject}" />
-                                    <Label
-                                        Grid.Column="2"
-                                        HorizontalTextAlignment="Center"
-                                        Text="{Binding Response}" />
-                                    <Label
-                                        Grid.Column="3"
-                                        HorizontalTextAlignment="Center"
-                                        Text="{Binding DateCreated}" />
-                                    <Label
-                                        Grid.Column="4"
-                                        HorizontalTextAlignment="Center"
-                                        Text="{Binding LastUpdated}" />
-                                    <Label
-                                        Grid.Column="5"
-                                        HorizontalTextAlignment="Center"
-                                        Text="{Binding Editor}" />
-                                </Grid>
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>-->
             </StackLayout>
         </ScrollView>
         <Grid
             Grid.Row="1"
             Padding="10"
-            BackgroundColor="{StaticResource Base}"
+            BackgroundColor="{StaticResource Crust}"
             ColumnDefinitions="*,*"
             HorizontalOptions="FillAndExpand">
             <Button
                 Grid.Column="0"
                 Margin="0,0,6,0"
                 BackgroundColor="{StaticResource Blue}"
-                Command="{Binding GoHomeCommand}"
+                Command="{Binding GoBackCommand}"
                 CornerRadius="25"
                 FontSize="30"
                 Text="Cancel"

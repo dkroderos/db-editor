@@ -25,11 +25,11 @@ public partial class PasswordViewModel(IEmailContextService emailContextService)
             await Shell.Current.DisplayAlert("Incorrect Password",
                 "The password you've entered was incorrect",
                 "Ok");
-            await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+            //await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
             return;
         }
 
-        await Shell.Current.GoToAsync($"..");
-        await Shell.Current.GoToAsync($"//{nameof(EmailContextsPage)}");
+        //await Shell.Current.GoToAsync($"..");
+        //await Shell.Current.GoToAsync($"//{nameof(EmailContextsPage)}");
     }
 }

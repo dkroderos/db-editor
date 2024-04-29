@@ -9,6 +9,11 @@
     BackgroundColor="{StaticResource Crust}"
     Shell.FlyoutItemIsVisible="False"
     Shell.NavBarIsVisible="False">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False" IsVisible="False" />
+    </Shell.BackButtonBehavior>
+
     <ScrollView>
         <StackLayout Margin="100,0" VerticalOptions="Center">
             <Label

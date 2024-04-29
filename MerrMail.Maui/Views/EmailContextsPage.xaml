@@ -8,6 +8,11 @@
     x:DataType="viewmodels:EmailContextsViewModel"
     BackgroundColor="{StaticResource Crust}"
     Shell.NavBarIsVisible="False">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False" IsVisible="False" />
+    </Shell.BackButtonBehavior>
+
     <Grid RowDefinitions="*,Auto">
         <ScrollView Grid.Row="0">
             <StackLayout Margin="10,0">

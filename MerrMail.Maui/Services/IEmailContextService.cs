@@ -14,5 +14,4 @@ public interface IEmailContextService
     Task AddAsync(EmailContext emailContext);
     Task RemoveAsync(int id);
     Task EditAsync(EmailContext emailContext);
-    Task<string?> GetPasswordAsync();
 }

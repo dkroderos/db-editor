@@ -21,7 +21,7 @@
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>MerrMail.Maui</ApplicationTitle>
+		<ApplicationTitle>MerrMail</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.merrmail.maui</ApplicationId>

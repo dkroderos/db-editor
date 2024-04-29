@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace MerrMail.Maui.ViewModels;
 
 [QueryProperty(nameof(EmailContext), "EmailContext")]
-public partial class EditEmailContextViewModel(IAccountService accountService, IEmailContextService emailContextService) : BaseViewModel
+public partial class EditEmailContextViewModel(IPasswordService passwordService, IAccountService accountService, IEmailContextService emailContextService) : BaseViewModel
 {
     [ObservableProperty]
     private EmailContext? emailContext;
@@ -38,6 +38,9 @@ public partial class EditEmailContextViewModel(IAccountService accountService, I
 
     [ObservableProperty]
     public string? password;
+
+    [ObservableProperty]
+    public string databasePassword;
 
     [RelayCommand]
     public async Task GetEmailContextAsync()
@@ -108,6 +111,14 @@ public partial class EditEmailContextViewModel(IAccountService accountService, I
             return;
         }
 
+        if (string.IsNullOrEmpty(DatabasePassword))
+        {
+            await Shell.Current.CurrentPage.DisplayAlert("Error",
+                "Database password cannot be empty",
+                "Ok");
+            return;
+        }
+
         bool isConfirmed = await Shell.Current.CurrentPage.DisplayAlert("Are you sure?",
             "Are you sure you want to edit this new Email Context?",
             "Yes", "No");
@@ -134,6 +145,16 @@ public partial class EditEmailContextViewModel(IAccountService accountService, I
             {
                 await Shell.Current.CurrentPage.DisplayAlert("Error",
                     "Incorrect password",
+                    "Ok");
+                return;
+            }
+
+            var dbPassword = await passwordService.GetPasswordAsync();
+
+            if (DatabasePassword != dbPassword)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Error",
+                    "Database password incorrect",
                     "Ok");
                 return;
             }

@@ -7,6 +7,11 @@
     x:DataType="viewmodels:CreateEmailContextViewModel"
     BackgroundColor="{StaticResource Crust}"
     Shell.NavBarIsVisible="False">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False" IsVisible="False" />
+    </Shell.BackButtonBehavior>
+
     <ScrollView>
         <StackLayout Margin="100,0" VerticalOptions="Center">
             <Label
@@ -92,7 +97,7 @@
                 IsPassword="True"
                 Placeholder="Enter the password of the database"
                 PlaceholderColor="{StaticResource Overlay0}"
-                Text=""
+                Text="{Binding DatabasePassword}"
                 TextColor="{StaticResource Text}" />
 
             <Grid

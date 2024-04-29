@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace MerrMail.Maui.ViewModels;
 
-public partial class AddAccountViewModel(IEmailContextService emailContextService, IAccountService accountService) : BaseViewModel
+public partial class AddAccountViewModel(IPasswordService passwordService, IEmailContextService emailContextService, IAccountService accountService) : BaseViewModel
 {
     [ObservableProperty]
     public string name;
@@ -56,6 +56,14 @@ public partial class AddAccountViewModel(IEmailContextService emailContextServic
             return;
         }
 
+        if (string.IsNullOrEmpty(DatabasePassword))
+        {
+            await Shell.Current.CurrentPage.DisplayAlert("Error",
+                "Database password cannot be empty",
+                "Ok");
+            return;
+        }
+
         bool isConfirmed = await Shell.Current.CurrentPage.DisplayAlert("Are you sure?",
             "Are you sure you want to create this new Account?",
             "Yes", "No");
@@ -67,7 +75,7 @@ public partial class AddAccountViewModel(IEmailContextService emailContextServic
         {
             IsBusy = true;
 
-            var dbPassword = await emailContextService.GetPasswordAsync();
+            var dbPassword = await passwordService.GetPasswordAsync();
 
             if (DatabasePassword != dbPassword)
             {

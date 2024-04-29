@@ -9,13 +9,17 @@
     BackgroundColor="{StaticResource Crust}"
     Shell.NavBarIsVisible="False">
 
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False" IsVisible="False" />
+    </Shell.BackButtonBehavior>
+
     <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         <Grid
             Margin="100,0"
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="All"
             ColumnDefinitions="*"
-            RowDefinitions="2*,*">
+            RowDefinitions="*,*">
 
             <Label
                 Grid.Row="0"
@@ -34,6 +38,14 @@
                     CornerRadius="30"
                     FontSize="30"
                     Text="Set Database"
+                    TextColor="{StaticResource Base}" />
+                <Button
+                    Margin="10"
+                    BackgroundColor="{StaticResource Lavender}"
+                    Command="{Binding GoToPasswordCommand}"
+                    CornerRadius="30"
+                    FontSize="30"
+                    Text="Change Database Password"
                     TextColor="{StaticResource Base}" />
                 <Button
                     Margin="10"

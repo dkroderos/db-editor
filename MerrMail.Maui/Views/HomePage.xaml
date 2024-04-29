@@ -5,10 +5,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodels="clr-namespace:MerrMail.Maui.ViewModels"
     Title="MerrMail Database Editor"
-    x:DataType="viewmodels:HomeViewModel">
+    x:DataType="viewmodels:HomeViewModel"
+    BackgroundColor="{StaticResource Crust}"
+    Shell.NavBarIsVisible="False">
 
     <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         <Grid
+            Margin="100,0"
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="All"
             ColumnDefinitions="*"
@@ -21,23 +24,33 @@
                 FontSize="50"
                 HorizontalOptions="Center"
                 Text="MerrMail Database Editor"
+                TextColor="{StaticResource Text}"
                 VerticalOptions="Center" />
             <StackLayout Grid.Row="1">
                 <Button
                     Margin="10"
-                    Command="{Binding GoToAddAccountCommand}"
-                    CornerRadius="30"
-                    Text="Add Account" />
-                <Button
-                    Margin="10"
+                    BackgroundColor="{StaticResource Maroon}"
                     Command="{Binding SetDatabaseCommand}"
                     CornerRadius="30"
-                    Text="Set Database" />
+                    FontSize="30"
+                    Text="Set Database"
+                    TextColor="{StaticResource Base}" />
                 <Button
                     Margin="10"
+                    BackgroundColor="{StaticResource Blue}"
+                    Command="{Binding GoToAddAccountCommand}"
+                    CornerRadius="30"
+                    FontSize="30"
+                    Text="Add Account"
+                    TextColor="{StaticResource Base}" />
+                <Button
+                    Margin="10"
+                    BackgroundColor="{StaticResource Green}"
                     Command="{Binding GoToEmailContextsCommand}"
                     CornerRadius="30"
-                    Text="Edit" />
+                    FontSize="30"
+                    Text="Show Email Contexts"
+                    TextColor="{StaticResource Base}" />
             </StackLayout>
         </Grid>
 

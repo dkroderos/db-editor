@@ -4,67 +4,102 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodels="clr-namespace:MerrMail.Maui.ViewModels"
-    Title="AddAccountPage"
+    Title="Add Account"
     x:DataType="viewmodels:AddAccountViewModel"
-    Shell.FlyoutItemIsVisible="False">
-    <Grid RowDefinitions="*,Auto">
-        <ScrollView Grid.Row="0">
-            <StackLayout>
-                <Grid Margin="10" ColumnDefinitions="Auto,*">
-                    <Label
-                        Grid.Column="0"
-                        Text="Name: "
-                        VerticalOptions="Center" />
-                    <Entry Grid.Column="1" Text="{Binding Name}" />
-                </Grid>
-                <Grid Margin="10" ColumnDefinitions="Auto,*">
-                    <Label
-                        Grid.Column="0"
-                        Text="Password: "
-                        VerticalOptions="Center" />
-                    <Entry
-                        Grid.Column="1"
-                        IsPassword="True"
-                        Text="{Binding Password}" />
-                </Grid>
-                <Grid Margin="10" ColumnDefinitions="Auto,*">
-                    <Label
-                        Grid.Column="0"
-                        Text="Repeat Password: "
-                        VerticalOptions="Center" />
-                    <Entry
-                        Grid.Column="1"
-                        IsPassword="True"
-                        Text="{Binding RepeatPassword}" />
-                </Grid>
-                <Grid Margin="10" ColumnDefinitions="Auto,*">
-                    <Label
-                        Grid.Column="0"
-                        Text="Database Password: "
-                        VerticalOptions="Center" />
-                    <Entry
-                        Grid.Column="1"
-                        IsPassword="True"
-                        Text="{Binding DatabasePassword}" />
-                </Grid>
-            </StackLayout>
-        </ScrollView>
+    BackgroundColor="{StaticResource Crust}"
+    Shell.FlyoutItemIsVisible="False"
+    Shell.NavBarIsVisible="False">
+    <StackLayout Margin="100" VerticalOptions="Center">
+        <Label
+            Margin="0,30"
+            FontAttributes="Bold"
+            FontSize="60"
+            Text="Create an account"
+            TextColor="{StaticResource Text}" />
+
+        <Label
+            Margin="5"
+            FontSize="20"
+            Text="Name: "
+            TextColor="{StaticResource Text}"
+            VerticalOptions="Center" />
+        <Entry
+            Margin="0,0,0,10"
+            BackgroundColor="{StaticResource Mantle}"
+            FontSize="20"
+            Placeholder="Enter your name"
+            PlaceholderColor="{StaticResource Overlay0}"
+            Text="{Binding Name}"
+            TextColor="{StaticResource Text}" />
+
+        <Label
+            Margin="5"
+            FontSize="20"
+            Text="Password: "
+            TextColor="{StaticResource Text}"
+            VerticalOptions="Center" />
+        <Entry
+            BackgroundColor="{StaticResource Mantle}"
+            FontSize="20"
+            IsPassword="True"
+            Placeholder="Enter your password"
+            PlaceholderColor="{StaticResource Overlay0}"
+            Text="{Binding Password}"
+            TextColor="{StaticResource Text}" />
+
+        <Label
+            Margin="5"
+            FontSize="20"
+            Text="Repeat Password: "
+            TextColor="{StaticResource Text}"
+            VerticalOptions="Center" />
+        <Entry
+            BackgroundColor="{StaticResource Mantle}"
+            FontSize="20"
+            IsPassword="True"
+            Placeholder="Enter your password"
+            PlaceholderColor="{StaticResource Overlay0}"
+            Text="{Binding RepeatPassword}"
+            TextColor="{StaticResource Text}" />
+
+        <Label
+            Margin="5"
+            FontSize="20"
+            Text="Database Password: "
+            TextColor="{StaticResource Text}"
+            VerticalOptions="Center" />
+        <Entry
+            BackgroundColor="{StaticResource Mantle}"
+            FontSize="20"
+            IsPassword="True"
+            Placeholder="Enter the password of the database"
+            PlaceholderColor="{StaticResource Overlay0}"
+            Text="{Binding DatabasePassword}"
+            TextColor="{StaticResource Text}" />
+
         <Grid
-            Grid.Row="1"
-            Padding="10"
+            Padding="0,30"
             ColumnDefinitions="*,*"
             HorizontalOptions="FillAndExpand">
             <Button
                 Grid.Column="0"
                 Margin="0,0,6,0"
-                Command="{Binding GoBackCommand}"
-                Text="Cancel" />
+                BackgroundColor="{StaticResource Red}"
+                Command="{Binding GoHomeCommand}"
+                CornerRadius="25"
+                FontSize="30"
+                Text="Cancel"
+                TextColor="{StaticResource Base}" />
 
             <Button
                 Grid.Column="1"
-                Margin="3,0,3,0"
+                Margin="6,0,0,0"
+                BackgroundColor="{StaticResource Green}"
                 Command="{Binding AddAccountCommand}"
-                Text="Add" />
+                CornerRadius="25"
+                FontSize="30"
+                Text="Add"
+                TextColor="{StaticResource Base}" />
         </Grid>
-    </Grid>
+    </StackLayout>
 </ContentPage>

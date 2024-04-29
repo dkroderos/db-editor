@@ -46,8 +46,8 @@ public static class MauiProgram
         builder.Services.AddTransient<EditEmailContextViewModel>();
         builder.Services.AddTransient<EditEmailContextPage>();
 
-        builder.Services.AddSingleton<EmailContextDetailsViewModel>();
-        builder.Services.AddSingleton<EmailContextDetailsPage>();
+        builder.Services.AddTransient<EmailContextDetailsViewModel>();
+        builder.Services.AddTransient<EmailContextDetailsPage>();
 
         builder.Services.AddSingleton<PasswordViewModel>();
         builder.Services.AddSingleton<PasswordPage>();

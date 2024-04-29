@@ -4,103 +4,161 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodels="clr-namespace:MerrMail.Maui.ViewModels"
-    Title="EditEmailContextPage"
-    x:DataType="viewmodels:EditEmailContextViewModel">
-    <Shell.BackButtonBehavior>
-        <BackButtonBehavior Command="{Binding GoBackCommand}" />
-    </Shell.BackButtonBehavior>
-    <Grid RowDefinitions="*,Auto">
-        <ScrollView Grid.Row="0">
-            <StackLayout>
-                <Grid Margin="10" ColumnDefinitions="Auto,*">
-                    <Label
-                        Grid.Column="0"
-                        Text="Id: "
-                        VerticalOptions="Center" />
-                    <Entry
-                        Grid.Column="1"
-                        IsReadOnly="True"
-                        Text="{Binding Id}" />
-                </Grid>
-                <Grid Margin="10" ColumnDefinitions="Auto,*">
-                    <Label
-                        Grid.Column="0"
-                        Text="Subject: "
-                        VerticalOptions="Center" />
-                    <Entry
-                        Grid.Column="1"
-                        HorizontalOptions="Fill"
-                        Text="{Binding Subject}" />
-                </Grid>
-                <Grid Margin="10" ColumnDefinitions="Auto,*">
-                    <Label
-                        Grid.Column="0"
-                        Text="Response: "
-                        VerticalOptions="Center" />
-                    <Editor
-                        Grid.Column="1"
-                        IsTextPredictionEnabled="False"
-                        Text="{Binding Response}" />
-                </Grid>
-                <Grid Margin="10" ColumnDefinitions="Auto,*">
-                    <Label
-                        Grid.Column="0"
-                        Text="Date Created: "
-                        VerticalOptions="Center" />
-                    <Entry
-                        Grid.Column="1"
-                        IsReadOnly="True"
-                        Text="{Binding DateCreated}" />
-                </Grid>
-                <Grid Margin="10" ColumnDefinitions="Auto,*">
-                    <Label
-                        Grid.Column="0"
-                        Text="Last Updated: "
-                        VerticalOptions="Center" />
-                    <Entry
-                        Grid.Column="1"
-                        IsReadOnly="True"
-                        Text="{Binding LastUpdated}" />
-                </Grid>
-                <Grid Margin="10" ColumnDefinitions="Auto,*">
-                    <Label
-                        Grid.Column="0"
-                        Text="Last Updated: "
-                        VerticalOptions="Center" />
-                    <Entry
-                        Grid.Column="1"
-                        IsReadOnly="True"
-                        Text="{Binding Editor}" />
-                </Grid>
-                <Grid Margin="10" ColumnDefinitions="Auto,*">
-                    <Label
-                        Grid.Column="0"
-                        Text="Password: "
-                        VerticalOptions="Center" />
-                    <Entry
-                        Grid.Column="1"
-                        IsPassword="True"
-                        Text="{Binding Password}" />
-                </Grid>
-            </StackLayout>
-        </ScrollView>
+    x:DataType="viewmodels:EditEmailContextViewModel"
+    BackgroundColor="{StaticResource Crust}"
+    Shell.NavBarIsVisible="False">
+
+    <StackLayout Margin="100,0" VerticalOptions="Center">
+        <Label
+            Margin="0,25"
+            FontAttributes="Bold"
+            FontSize="60"
+            Text="Edit Email Context"
+            TextColor="{StaticResource Text}" />
+
+        <HorizontalStackLayout Margin="0,0,0,10">
+            <Label
+                Margin="0,0,5,0"
+                FontAttributes="Bold"
+                FontSize="20"
+                Text="Id: "
+                TextColor="{StaticResource Text}" />
+            <Label
+                FontAttributes="Bold"
+                FontSize="20"
+                Text="{Binding Id}"
+                TextColor="{StaticResource Subtext0}" />
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout Margin="0,0,0,10">
+            <Label
+                Margin="0,0,5,0"
+                FontAttributes="Bold"
+                FontSize="20"
+                Text="Editor: "
+                TextColor="{StaticResource Text}" />
+            <Label
+                FontAttributes="Bold"
+                FontSize="20"
+                Text="{Binding Editor}"
+                TextColor="{StaticResource Subtext0}" />
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout Margin="0,0,0,10">
+            <Label
+                Margin="0,0,5,0"
+                FontAttributes="Bold"
+                FontSize="20"
+                Text="Date Created: "
+                TextColor="{StaticResource Text}" />
+            <Label
+                FontAttributes="Bold"
+                FontSize="20"
+                Text="{Binding DateCreated}"
+                TextColor="{StaticResource Subtext0}" />
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout Margin="0,0,0,10">
+            <Label
+                Margin="0,0,5,0"
+                FontAttributes="Bold"
+                FontSize="20"
+                Text="Last Updated: "
+                TextColor="{StaticResource Text}" />
+            <Label
+                FontAttributes="Bold"
+                FontSize="20"
+                Text="{Binding LastUpdated}"
+                TextColor="{StaticResource Subtext0}" />
+        </HorizontalStackLayout>
+
+        <Label
+            Grid.Column="0"
+            Margin="0,0,0,5"
+            FontSize="20"
+            Text="Subject: "
+            TextColor="{StaticResource Text}"
+            VerticalOptions="Center" />
+        <Entry
+            Grid.Column="1"
+            Margin="0,0,0,10"
+            BackgroundColor="{StaticResource Mantle}"
+            HorizontalOptions="Fill"
+            Placeholder="Subject cannot be empty"
+            PlaceholderColor="{StaticResource Overlay0}"
+            Text="{Binding Subject}"
+            TextColor="{StaticResource Text}" />
+
+        <Label
+            Grid.Column="0"
+            Margin="0,0,0,5"
+            FontSize="20"
+            Text="Response: "
+            TextColor="{StaticResource Text}"
+            VerticalOptions="Center" />
+        <Editor
+            Grid.Column="1"
+            Margin="0,0,0,10"
+            BackgroundColor="{StaticResource Mantle}"
+            HeightRequest="200"
+            HorizontalOptions="Fill"
+            IsTextPredictionEnabled="False"
+            Placeholder="Response cannot be empty"
+            PlaceholderColor="{StaticResource Overlay0}"
+            Text="{Binding Response}"
+            TextColor="{StaticResource Text}" />
+
+        <Label
+            Grid.Column="0"
+            Margin="0,0,0,5"
+            FontSize="20"
+            Text="Account Password: "
+            TextColor="{StaticResource Text}"
+            VerticalOptions="Center" />
+        <Entry
+            Grid.Column="1"
+            Margin="0,0,0,10"
+            BackgroundColor="{StaticResource Mantle}"
+            HorizontalOptions="Fill"
+            IsPassword="True"
+            Placeholder="Account password cannot be empty"
+            PlaceholderColor="{StaticResource Overlay0}"
+            Text="{Binding Password}"
+            TextColor="{StaticResource Text}" />
+
         <Grid
-            Grid.Row="1"
-            Padding="10"
-            ColumnDefinitions="*,*"
+            Padding="0,30"
+            ColumnDefinitions="*,*,*"
             HorizontalOptions="FillAndExpand">
             <Button
                 Grid.Column="0"
                 Margin="0,0,6,0"
+                BackgroundColor="{StaticResource Blue}"
                 Command="{Binding GoBackCommand}"
-                Text="Cancel" />
+                CornerRadius="25"
+                FontSize="30"
+                Text="Cancel"
+                TextColor="{StaticResource Base}" />
 
             <Button
                 Grid.Column="1"
                 Margin="3,0,3,0"
+                BackgroundColor="{StaticResource Green}"
                 Command="{Binding EditEmailContextCommand}"
-                Text="Edit" />
-        </Grid>
+                CornerRadius="25"
+                FontSize="30"
+                Text="Edit"
+                TextColor="{StaticResource Base}" />
 
-    </Grid>
+            <Button
+                Grid.Column="2"
+                Margin="6,0,0,0"
+                BackgroundColor="{StaticResource Red}"
+                Command="{Binding}"
+                CornerRadius="25"
+                FontSize="30"
+                Text="Remove"
+                TextColor="{StaticResource Base}" />
+        </Grid>
+    </StackLayout>
 </ContentPage>

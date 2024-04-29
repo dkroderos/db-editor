@@ -4,8 +4,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodels="clr-namespace:MerrMail.Maui.ViewModels"
-    Title="EmailContextDetailsPage"
-    x:DataType="viewmodels:EmailContextDetailsViewModel">
+    x:DataType="viewmodels:EmailContextDetailsViewModel"
+    Shell.NavBarIsVisible="False">
     <Grid RowDefinitions="*,Auto">
         <ScrollView Grid.Row="0">
             <StackLayout>

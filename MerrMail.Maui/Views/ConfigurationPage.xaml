@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MerrMail.Maui.Views.ConfigurationPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:MerrMail.Maui.ViewModels"
+    Title="Create Configuration"
+    x:DataType="viewmodels:ConfigurationViewModel"
+    BackgroundColor="{StaticResource Crust}"
+    Shell.FlyoutItemIsVisible="False"
+    Shell.NavBarIsVisible="False">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False" IsVisible="False" />
+    </Shell.BackButtonBehavior>
+
+    <ScrollView>
+        <StackLayout Margin="100,0" VerticalOptions="Center">
+            <Label
+                Margin="0,0,0,30"
+                FontAttributes="Bold"
+                FontSize="60"
+                Text="Create configuration"
+                TextColor="{StaticResource Text}" />
+
+            <Label
+                Margin="5"
+                FontSize="20"
+                Text="Header: "
+                TextColor="{StaticResource Text}"
+                VerticalOptions="Center" />
+            <Entry
+                Margin="0,0,0,10"
+                BackgroundColor="{StaticResource Mantle}"
+                FontSize="20"
+                Placeholder="Introduce yourself"
+                PlaceholderColor="{StaticResource Overlay0}"
+                Text="{Binding Header}"
+                TextColor="{StaticResource Text}" />
+
+            <Label
+                Margin="5"
+                FontSize="20"
+                Text="Introduction: "
+                TextColor="{StaticResource Text}"
+                VerticalOptions="Center" />
+            <Entry
+                BackgroundColor="{StaticResource Mantle}"
+                FontSize="20"
+                Placeholder="Explain what's going on"
+                PlaceholderColor="{StaticResource Overlay0}"
+                Text="{Binding Introduction}"
+                TextColor="{StaticResource Text}" />
+
+            <Label
+                Margin="5"
+                FontSize="20"
+                Text="Conclusion"
+                TextColor="{StaticResource Text}"
+                VerticalOptions="Center" />
+            <Entry
+                BackgroundColor="{StaticResource Mantle}"
+                FontSize="20"
+                Placeholder="Outline next steps"
+                PlaceholderColor="{StaticResource Overlay0}"
+                Text="{Binding Conclusion}"
+                TextColor="{StaticResource Text}" />
+
+            <Label
+                Margin="5"
+                FontSize="20"
+                Text="Closing: "
+                TextColor="{StaticResource Text}"
+                VerticalOptions="Center" />
+            <Entry
+                BackgroundColor="{StaticResource Mantle}"
+                FontSize="20"
+                Placeholder="Warm regards"
+                PlaceholderColor="{StaticResource Overlay0}"
+                Text="{Binding Closing}"
+                TextColor="{StaticResource Text}" />
+
+            <Label
+                Margin="5"
+                FontSize="20"
+                Text="Signature: "
+                TextColor="{StaticResource Text}"
+                VerticalOptions="Center" />
+            <Entry
+                BackgroundColor="{StaticResource Mantle}"
+                FontSize="20"
+                Placeholder="Your contact information"
+                PlaceholderColor="{StaticResource Overlay0}"
+                Text="{Binding Signature}"
+                TextColor="{StaticResource Text}" />
+
+            <Label
+                Margin="5"
+                FontSize="20"
+                Text="OAuth 2.0 Client Credentials File Path: "
+                TextColor="{StaticResource Text}"
+                VerticalOptions="Center" />
+            <Grid ColumnDefinitions="3*,*">
+                <Entry
+                    Grid.Column="0"
+                    Margin="0,0,5,0"
+                    BackgroundColor="{StaticResource Mantle}"
+                    FontSize="20"
+                    IsReadOnly="True"
+                    Placeholder="No file chosen"
+                    PlaceholderColor="{StaticResource Overlay0}"
+                    Text="{Binding OAuthClientCredentialsFilePath}"
+                    TextColor="{StaticResource Text}" />
+                <Button
+                    Grid.Column="1"
+                    Margin="5,0,0,0"
+                    BackgroundColor="{StaticResource Flamingo}"
+                    Command="{Binding ChooseOAuthClientCredentialsFilePathCommand}"
+                    CornerRadius="10"
+                    FontSize="20"
+                    Text="Choose file"
+                    TextColor="{StaticResource Base}" />
+            </Grid>
+
+            <Label
+                Margin="5"
+                FontSize="20"
+                Text="Access Token Directory Path: "
+                TextColor="{StaticResource Text}"
+                VerticalOptions="Center" />
+            <Grid ColumnDefinitions="3*,*">
+                <Entry
+                    Grid.Column="0"
+                    Margin="0,0,5,0"
+                    BackgroundColor="{StaticResource Mantle}"
+                    FontSize="20"
+                    IsReadOnly="True"
+                    Placeholder="No folder chosen"
+                    PlaceholderColor="{StaticResource Overlay0}"
+                    Text="{Binding AccessTokenDirectoryPath}"
+                    TextColor="{StaticResource Text}" />
+                <Button
+                    Grid.Column="1"
+                    Margin="5,0,0,0"
+                    BackgroundColor="{StaticResource Mauve}"
+                    Command="{Binding ChooseAccessTokenDirectoryCommand}"
+                    CornerRadius="10"
+                    FontSize="20"
+                    Text="Choose folder"
+                    TextColor="{StaticResource Base}" />
+            </Grid>
+
+            <Label
+                Margin="5"
+                FontSize="20"
+                Text="Host Address: "
+                TextColor="{StaticResource Text}"
+                VerticalOptions="Center" />
+            <Entry
+                BackgroundColor="{StaticResource Mantle}"
+                FontSize="20"
+                Placeholder="sample@sample.domain"
+                PlaceholderColor="{StaticResource Overlay0}"
+                Text="{Binding HostAddress}"
+                TextColor="{StaticResource Text}" />
+
+            <Label
+                Margin="5"
+                FontSize="20"
+                Text="Host Password: "
+                TextColor="{StaticResource Text}"
+                VerticalOptions="Center" />
+            <Entry
+                BackgroundColor="{StaticResource Mantle}"
+                FontSize="20"
+                IsPassword="True"
+                Placeholder="Enter your 16-digit app password of the host email"
+                PlaceholderColor="{StaticResource Overlay0}"
+                Text="{Binding HostPassword}"
+                TextColor="{StaticResource Text}" />
+
+
+            <Label
+                Margin="5"
+                FontSize="20"
+                Text="Database Path: "
+                TextColor="{StaticResource Text}"
+                VerticalOptions="Center" />
+            <Grid ColumnDefinitions="3*,*">
+                <Entry
+                    Grid.Column="0"
+                    Margin="0,0,5,0"
+                    BackgroundColor="{StaticResource Mantle}"
+                    FontSize="20"
+                    IsReadOnly="True"
+                    Placeholder="No database chosen"
+                    PlaceholderColor="{StaticResource Overlay0}"
+                    Text="{Binding DataStorageAccess}"
+                    TextColor="{StaticResource Text}" />
+                <Button
+                    Grid.Column="1"
+                    Margin="5,0,0,0"
+                    BackgroundColor="{StaticResource Yellow}"
+                    Command="{Binding ChooseDatabaseCommand}"
+                    CornerRadius="10"
+                    FontSize="20"
+                    Text="Choose database"
+                    TextColor="{StaticResource Base}" />
+            </Grid>
+
+            <Label
+                Margin="5"
+                FontSize="20"
+                Text="Acceptance Score: "
+                TextColor="{StaticResource Text}"
+                VerticalOptions="Center" />
+            <Entry
+                Grid.Column="0"
+                BackgroundColor="{StaticResource Mantle}"
+                FontSize="20"
+                Placeholder="No acceptance score"
+                PlaceholderColor="{StaticResource Overlay0}"
+                Text="{Binding AcceptanceScore}"
+                TextColor="{StaticResource Text}" />
+
+            <Grid
+                Padding="0,30"
+                ColumnDefinitions="*,*"
+                HorizontalOptions="FillAndExpand">
+                <Button
+                    Grid.Column="0"
+                    Margin="0,0,6,0"
+                    BackgroundColor="{StaticResource Red}"
+                    Command="{Binding GoBackCommand}"
+                    CornerRadius="25"
+                    FontSize="30"
+                    Text="Cancel"
+                    TextColor="{StaticResource Base}" />
+
+                <Button
+                    Grid.Column="1"
+                    Margin="6,0,0,0"
+                    BackgroundColor="{StaticResource Green}"
+                    Command="{Binding CreateConfigurationCommand}"
+                    CornerRadius="25"
+                    FontSize="30"
+                    Text="Create"
+                    TextColor="{StaticResource Base}" />
+            </Grid>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

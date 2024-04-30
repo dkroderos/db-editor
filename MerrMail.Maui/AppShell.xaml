@@ -35,4 +35,9 @@
         ContentTemplate="{DataTemplate views:CreateEmailContextPage}"
         FlyoutItemIsVisible="False"
         Route="CreateEmailContextPage" />
+    <ShellContent
+        Title="Create Configuration"
+        ContentTemplate="{DataTemplate views:ConfigurationPage}"
+        FlyoutItemIsVisible="False"
+        Route="ConfigurationPage" />
 </Shell>

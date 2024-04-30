@@ -50,6 +50,9 @@ public static class MauiProgram
         builder.Services.AddSingleton<PasswordViewModel>();
         builder.Services.AddSingleton<PasswordPage>();
 
+        builder.Services.AddSingleton<ConfigurationViewModel>();
+        builder.Services.AddSingleton<ConfigurationPage>();
+
         return builder.Build();
     }
 }

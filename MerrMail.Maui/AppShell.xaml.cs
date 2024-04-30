@@ -11,6 +11,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(EditEmailContextPage), typeof(EditEmailContextPage));
         Routing.RegisterRoute(nameof(PasswordPage), typeof(PasswordPage));
         Routing.RegisterRoute(nameof(AddAccountPage), typeof(AddAccountPage));
+        Routing.RegisterRoute(nameof(ConfigurationPage), typeof(ConfigurationPage));
 
         InitializeComponent();
     }

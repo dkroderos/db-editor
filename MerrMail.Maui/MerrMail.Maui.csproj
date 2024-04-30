@@ -72,6 +72,9 @@
 	  <MauiXaml Update="Views\AddAccountPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\ConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\CreateEmailContextPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

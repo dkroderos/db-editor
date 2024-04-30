@@ -150,4 +150,26 @@ public partial class HomeViewModel : BaseViewModel
             IsBusy = false;
         }
     }
+
+    [RelayCommand]
+    private async Task GoToConfigurationAsync()
+    {
+        if (IsBusy) return;
+
+        try
+        {
+            IsBusy = true;
+
+            await Shell.Current.GoToAsync($"{nameof(ConfigurationPage)}");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            await Shell.Current.DisplayAlert("Error", $"Unable to create configuration: {ex.Message}", "Ok");
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
 }

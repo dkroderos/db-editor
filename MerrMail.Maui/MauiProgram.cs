@@ -6,6 +6,7 @@ using MerrMail.Maui.Views;
 using Microsoft.Extensions.Logging;
 
 namespace MerrMail.Maui;
+
 public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
@@ -24,8 +25,15 @@ public static class MauiProgram
         builder.Logging.AddDebug();
 #endif
 
+        builder.Services.AddSingleton<Account>();
+
         builder.Services.AddSingleton<ISettings, Settings>();
         builder.Services.AddSingleton<IEmailContextService, EmailContextService>();
+        builder.Services.AddSingleton<IPasswordService, PasswordService>();
+        builder.Services.AddSingleton<IAccountService, AccountService>();
+
+        builder.Services.AddTransient<AddAccountViewModel>();
+        builder.Services.AddTransient<AddAccountPage>();
 
         builder.Services.AddSingleton<EmailContextsViewModel>();
         builder.Services.AddSingleton<EmailContextsPage>();
@@ -33,17 +41,17 @@ public static class MauiProgram
         builder.Services.AddSingleton<HomeViewModel>();
         builder.Services.AddSingleton<HomePage>();
 
-        builder.Services.AddSingleton<CreateEmailContextViewModel>();
-        builder.Services.AddSingleton<CreateEmailContextPage>();
+        builder.Services.AddTransient<CreateEmailContextViewModel>();
+        builder.Services.AddTransient<CreateEmailContextPage>();
 
-        builder.Services.AddSingleton<EditEmailContextViewModel>();
-        builder.Services.AddSingleton<EditEmailContextPage>();
-
-        builder.Services.AddSingleton<EmailContextDetailsViewModel>();
-        builder.Services.AddSingleton<EmailContextDetailsPage>();
+        builder.Services.AddTransient<EditEmailContextViewModel>();
+        builder.Services.AddTransient<EditEmailContextPage>();
 
         builder.Services.AddSingleton<PasswordViewModel>();
         builder.Services.AddSingleton<PasswordPage>();
+
+        builder.Services.AddSingleton<ConfigurationViewModel>();
+        builder.Services.AddSingleton<ConfigurationPage>();
 
         return builder.Build();
     }

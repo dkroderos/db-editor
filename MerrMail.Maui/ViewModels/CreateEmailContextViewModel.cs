@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace MerrMail.Maui.ViewModels;
 
-public partial class CreateEmailContextViewModel(IEmailContextService emailContextService) : BaseViewModel
+public partial class CreateEmailContextViewModel(IPasswordService passwordService, IAccountService accountService, IEmailContextService emailContextService) : BaseViewModel
 {
     [ObservableProperty]
     public string? subject;
@@ -16,6 +16,12 @@ public partial class CreateEmailContextViewModel(IEmailContextService emailConte
 
     [ObservableProperty]
     public string? name;
+
+    [ObservableProperty]
+    public string? password;
+
+    [ObservableProperty]
+    public string databasePassword;
 
     [RelayCommand]
     public async Task CreateEmailContextAsync()
@@ -46,6 +52,22 @@ public partial class CreateEmailContextViewModel(IEmailContextService emailConte
             return;
         }
 
+        if (string.IsNullOrEmpty(Password))
+        {
+            await Shell.Current.CurrentPage.DisplayAlert("Error",
+                "Password cannot be empty",
+                "Ok");
+            return;
+        }
+
+        if (string.IsNullOrEmpty(DatabasePassword))
+        {
+            await Shell.Current.CurrentPage.DisplayAlert("Error",
+                "Database password cannot be empty",
+                "Ok");
+            return;
+        }
+
         bool isConfirmed = await Shell.Current.CurrentPage.DisplayAlert("Are you sure?",
             "Are you sure you want to create this new Email Context?",
             "Yes", "No");
@@ -56,6 +78,35 @@ public partial class CreateEmailContextViewModel(IEmailContextService emailConte
         try
         {
             IsBusy = true;
+
+            var accounts = await accountService.GetAllAsync();
+            var account = accounts.Where(a => a.Name == Name).FirstOrDefault();
+
+            if (account is null)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Error",
+                    "Account not found",
+                    "Ok");
+                return;
+            }
+
+            if (account.Password != Password)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Error",
+                    "Incorrect password",
+                    "Ok");
+                return;
+            }
+
+            var dbPassword = await passwordService.GetPasswordAsync();
+
+            if (DatabasePassword != dbPassword)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Error",
+                    "Database password incorrect",
+                    "Ok");
+                return;
+            }
 
             var emailContext = new EmailContext
             {

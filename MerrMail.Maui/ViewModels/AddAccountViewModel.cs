@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MerrMail.Maui.Models;
 using MerrMail.Maui.Services;
 using MerrMail.Maui.Views;
 using System;
@@ -8,35 +9,38 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace MerrMail.Maui.ViewModels;
 
-public partial class PasswordViewModel(IPasswordService passwordService) : BaseViewModel
+public partial class AddAccountViewModel(IPasswordService passwordService, IEmailContextService emailContextService, IAccountService accountService) : BaseViewModel
 {
     [ObservableProperty]
-    public string? currentPassword;
+    public string name;
 
     [ObservableProperty]
-    public string? newPassword;
+    public string password;
 
     [ObservableProperty]
-    public string? repeatPassword;
+    public string repeatPassword;
+
+    [ObservableProperty]
+    public string databasePassword;
 
     [RelayCommand]
-    private async Task ChangePasswordAsync()
+    private async Task AddAccountAsync()
     {
-        if (IsBusy) return;
+        if (IsBusy)
+            return;
 
-        if (string.IsNullOrEmpty(CurrentPassword))
+        if (string.IsNullOrEmpty(Name))
         {
             await Shell.Current.CurrentPage.DisplayAlert("Error",
-                "Current password cannot be empty",
+                "Name cannot be empty",
                 "Ok");
             return;
         }
 
-        if (string.IsNullOrEmpty(NewPassword))
+        if (string.IsNullOrEmpty(Password))
         {
             await Shell.Current.CurrentPage.DisplayAlert("Error",
                 "Password cannot be empty",
@@ -44,7 +48,7 @@ public partial class PasswordViewModel(IPasswordService passwordService) : BaseV
             return;
         }
 
-        if (NewPassword != RepeatPassword)
+        if (Password != RepeatPassword)
         {
             await Shell.Current.CurrentPage.DisplayAlert("Error",
                 "Passwords do not match",
@@ -52,8 +56,16 @@ public partial class PasswordViewModel(IPasswordService passwordService) : BaseV
             return;
         }
 
+        if (string.IsNullOrEmpty(DatabasePassword))
+        {
+            await Shell.Current.CurrentPage.DisplayAlert("Error",
+                "Database password cannot be empty",
+                "Ok");
+            return;
+        }
+
         bool isConfirmed = await Shell.Current.CurrentPage.DisplayAlert("Are you sure?",
-            "Are you sure you want to change the password of the database?",
+            "Are you sure you want to create this new Account?",
             "Yes", "No");
 
         if (!isConfirmed)
@@ -65,7 +77,7 @@ public partial class PasswordViewModel(IPasswordService passwordService) : BaseV
 
             var dbPassword = await passwordService.GetPasswordAsync();
 
-            if (CurrentPassword != dbPassword)
+            if (DatabasePassword != dbPassword)
             {
                 await Shell.Current.CurrentPage.DisplayAlert("Error",
                     "Database password incorrect",
@@ -73,8 +85,23 @@ public partial class PasswordViewModel(IPasswordService passwordService) : BaseV
                 return;
             }
 
-            await passwordService.ChangePasswordAsync(NewPassword);
-            await Shell.Current.DisplayAlert("Success", "Password changed", "Ok");
+            var accounts = await accountService.GetAllAsync();
+
+            var accountExists = accounts.Any(a => a.Name == Name);
+            if (accountExists)
+            {
+                await Shell.Current.DisplayAlert("Error", $"Account named {Name} already exists", "Ok");
+                return;
+            }
+
+            var account = new Account
+            {
+                Name = Name,
+                Password = Password,
+            };
+
+            await accountService.AddAsync(account);
+            await Shell.Current.DisplayAlert("Success", $"Account created", "Ok");
 
             await Shell.Current.GoToAsync($"..");
         }

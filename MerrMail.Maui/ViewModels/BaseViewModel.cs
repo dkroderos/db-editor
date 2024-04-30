@@ -18,12 +18,6 @@ public partial class BaseViewModel : ObservableObject
     [RelayCommand]
     public async Task GoBackAsync()
     {
-        await Shell.Current.GoToAsync($"//{nameof(EmailContextsPage)}");
-    }
-
-    [RelayCommand]
-    public async Task GoHomeAsync()
-    {
-        await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+        await Shell.Current.GoToAsync($"..");
     }
 }

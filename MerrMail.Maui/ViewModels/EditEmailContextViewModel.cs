@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace MerrMail.Maui.ViewModels;
 
 [QueryProperty(nameof(EmailContext), "EmailContext")]
-public partial class EditEmailContextViewModel(IEmailContextService emailContextService) : BaseViewModel
+public partial class EditEmailContextViewModel(IPasswordService passwordService, IAccountService accountService, IEmailContextService emailContextService) : BaseViewModel
 {
     [ObservableProperty]
     private EmailContext? emailContext;
@@ -35,6 +35,12 @@ public partial class EditEmailContextViewModel(IEmailContextService emailContext
 
     [ObservableProperty]
     public string? editor;
+
+    [ObservableProperty]
+    public string? password;
+
+    [ObservableProperty]
+    public string databasePassword;
 
     [RelayCommand]
     public async Task GetEmailContextAsync()
@@ -97,6 +103,22 @@ public partial class EditEmailContextViewModel(IEmailContextService emailContext
             return;
         }
 
+        if (string.IsNullOrEmpty(Password))
+        {
+            await Shell.Current.CurrentPage.DisplayAlert("Error",
+                "Password cannot be empty",
+                "Ok");
+            return;
+        }
+
+        if (string.IsNullOrEmpty(DatabasePassword))
+        {
+            await Shell.Current.CurrentPage.DisplayAlert("Error",
+                "Database password cannot be empty",
+                "Ok");
+            return;
+        }
+
         bool isConfirmed = await Shell.Current.CurrentPage.DisplayAlert("Are you sure?",
             "Are you sure you want to edit this new Email Context?",
             "Yes", "No");
@@ -107,6 +129,35 @@ public partial class EditEmailContextViewModel(IEmailContextService emailContext
         try
         {
             IsBusy = true;
+
+            var accounts = await accountService.GetAllAsync();
+            var account = accounts.Where(a => a.Name == Editor).FirstOrDefault();
+
+            if (account is null)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Error",
+                    "Account not found",
+                    "Ok");
+                return;
+            }
+
+            if (account.Password != Password)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Error",
+                    "Incorrect password",
+                    "Ok");
+                return;
+            }
+
+            var dbPassword = await passwordService.GetPasswordAsync();
+
+            if (DatabasePassword != dbPassword)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Error",
+                    "Database password incorrect",
+                    "Ok");
+                return;
+            }
 
             var emailContext = new EmailContext
             {
@@ -124,7 +175,7 @@ public partial class EditEmailContextViewModel(IEmailContextService emailContext
                 "Email Context successfully edited",
                 "Ok");
 
-            await Shell.Current.GoToAsync($"//{nameof(EmailContextsPage)}");
+            await Shell.Current.GoToAsync($"..");
         }
         catch (Exception ex)
         {
@@ -132,6 +183,44 @@ public partial class EditEmailContextViewModel(IEmailContextService emailContext
 
             await Shell.Current.CurrentPage.DisplayAlert("Error",
                 $"Unable to edit this Email Context: ${ex.Message}",
+                "Ok");
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
+
+    [RelayCommand]
+    public async Task RemoveEmailContextAsync()
+    {
+        if (EmailContext is null || IsBusy) return;
+
+        bool isConfirmed = await Shell.Current.CurrentPage.DisplayAlert("Are you sure?",
+            "Are you sure you want to remove this Email Context?",
+            "Yes", "No");
+
+        if (!isConfirmed)
+            return;
+
+        try
+        {
+            IsBusy = true;
+
+            await emailContextService.RemoveAsync(EmailContext!.Id);
+
+            await Shell.Current.CurrentPage.DisplayAlert("Success",
+                "Successfully removed Email Context",
+                "Ok");
+
+            await Shell.Current.GoToAsync("..");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+
+            await Shell.Current.CurrentPage.DisplayAlert("Error",
+                $"Unable to remove Email Context: {ex.Message}",
                 "Ok");
         }
         finally

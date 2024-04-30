@@ -1,6 +1,4 @@
-﻿using MerrMail.Maui.Views;
-
-namespace MerrMail.Maui;
+﻿namespace MerrMail.Maui;
 
 public partial class App : Application
 {

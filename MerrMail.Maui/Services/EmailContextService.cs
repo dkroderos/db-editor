@@ -10,21 +10,15 @@ namespace MerrMail.Maui.Services;
 
 public class EmailContextService : IEmailContextService
 {
-    private readonly ISettings settings;
-
-    public EmailContextService(ISettings settings)
-    {
-        this.settings = settings;
-    }
-
     public async Task AddAsync(EmailContext emailContext)
     {
-        var connectionString = $@"Data Source=file:{settings.Path}";
+        var path = await SecureStorage.Default.GetAsync("database");
+        var connectionString = $@"Data Source=file:{path}";
 
         using var connection = new SqliteConnection(connectionString);
         await connection.OpenAsync();
 
-        var query = "INSERT INTO EmailContext (Subject, Response, DateCreated, LastUpdated, Editor) " +
+        var query = "INSERT INTO EmailContexts (Subject, Response, DateCreated, LastUpdated, Editor) " +
             "VALUES (@Subject, @Response, @DateCreated, @LastUpdated, @Editor)";
 
         using var command = new SqliteCommand(query, connection);
@@ -40,12 +34,13 @@ public class EmailContextService : IEmailContextService
 
     public async Task RemoveAsync(int id)
     {
-        var connectionString = $@"Data Source=file:{settings.Path}";
+        var path = await SecureStorage.Default.GetAsync("database");
+        var connectionString = $@"Data Source=file:{path}";
 
         using var connection = new SqliteConnection(connectionString);
         await connection.OpenAsync();
 
-        var query = "DELETE FROM EmailContext WHERE Id = @Id";
+        var query = "DELETE FROM EmailContexts WHERE Id = @Id";
         using var command = new SqliteCommand(query, connection);
 
         command.Parameters.AddWithValue("@Id", id);
@@ -55,12 +50,13 @@ public class EmailContextService : IEmailContextService
 
     public async Task EditAsync(EmailContext emailContext)
     {
-        var connectionString = $@"Data Source=file:{settings.Path}";
+        var path = await SecureStorage.Default.GetAsync("database");
+        var connectionString = $@"Data Source=file:{path}";
 
         using var connection = new SqliteConnection(connectionString);
         await connection.OpenAsync();
 
-        var query = "UPDATE EmailContext SET Subject = @Subject, Response = @Response, DateCreated = @DateCreated, LastUpdated = @LastUpdated, Editor = @Editor WHERE Id = @Id";
+        var query = "UPDATE EmailContexts SET Subject = @Subject, Response = @Response, DateCreated = @DateCreated, LastUpdated = @LastUpdated, Editor = @Editor WHERE Id = @Id";
         var command = new SqliteCommand(query, connection);
 
         command.Parameters.AddWithValue("@Id", emailContext.Id);
@@ -75,13 +71,14 @@ public class EmailContextService : IEmailContextService
 
     public async Task<IEnumerable<EmailContext>> GetAllAsync()
     {
-        var connectionString = $@"Data Source=file:{settings.Path}";
+        var path = await SecureStorage.Default.GetAsync("database");
+        var connectionString = $@"Data Source=file:{path}";
         var emailContexts = new List<EmailContext>();
 
         using var connection = new SqliteConnection(connectionString);
         await connection.OpenAsync();
 
-        var query = $"SELECT * FROM EmailContext";
+        var query = $"SELECT * FROM EmailContexts";
         using var command = new SqliteCommand(query, connection);
         using var reader = await command.ExecuteReaderAsync();
 
@@ -105,12 +102,13 @@ public class EmailContextService : IEmailContextService
 
     public async Task<EmailContext?> GetAsync(int id)
     {
-        var connectionString = $@"Data Source=file:{settings.Path}";
+        var path = await SecureStorage.Default.GetAsync("database");
+        var connectionString = $@"Data Source=file:{path}";
 
         using var connection = new SqliteConnection(connectionString);
         await connection.OpenAsync();
 
-        var query = "SELECT * FROM EmailContext WHERE Id = @Id";
+        var query = "SELECT * FROM EmailContexts WHERE Id = @Id";
         using var command = new SqliteCommand(query, connection);
 
         command.Parameters.AddWithValue("@Id", id);
@@ -130,27 +128,6 @@ public class EmailContextService : IEmailContextService
             };
 
             return emailContext;
-        }
-
-        return null;
-    }
-
-    public async Task<string?> GetPasswordAsync()
-    {
-        var connectionString = $@"Data Source=file:{settings.Path}";
-
-        using var connection = new SqliteConnection(connectionString);
-        await connection.OpenAsync();
-
-        var query = "SELECT Password FROM Password";
-        using var command = new SqliteCommand(query, connection);
-
-        using var reader = await command.ExecuteReaderAsync();
-
-        while (await reader.ReadAsync())
-        {
-            var password = reader.GetString(0);
-            return password;
         }
 
         return null;

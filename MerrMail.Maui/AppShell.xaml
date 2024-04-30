@@ -5,28 +5,27 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:MerrMail.Maui.Views"
     Title="MerrMail.Maui"
-    Shell.FlyoutBehavior="Flyout">
+    Shell.FlyoutBehavior="Disabled">
 
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate views:HomePage}"
-        Route="HomePage"
-        Shell.FlyoutBehavior="Disabled" />
+        Route="HomePage" />
+    <ShellContent
+        Title="Add Account"
+        ContentTemplate="{DataTemplate views:AddAccountPage}"
+        FlyoutItemIsVisible="False"
+        Route="AddAccountPage" />
     <ShellContent
         Title="Edit Email Context"
         ContentTemplate="{DataTemplate views:EditEmailContextPage}"
         FlyoutItemIsVisible="False"
         Route="EditEmailContextPage" />
     <ShellContent
-        Title="Enter Your Password"
+        Title="Password"
         ContentTemplate="{DataTemplate views:PasswordPage}"
         FlyoutItemIsVisible="False"
         Route="PasswordPage" />
-    <ShellContent
-        Title="Email Context Details"
-        ContentTemplate="{DataTemplate views:EmailContextDetailsPage}"
-        FlyoutItemIsVisible="False"
-        Route="EmailContextDetailsPage" />
     <ShellContent
         Title="Email Contexts"
         ContentTemplate="{DataTemplate views:EmailContextsPage}"
@@ -36,4 +35,9 @@
         ContentTemplate="{DataTemplate views:CreateEmailContextPage}"
         FlyoutItemIsVisible="False"
         Route="CreateEmailContextPage" />
+    <ShellContent
+        Title="Create Configuration"
+        ContentTemplate="{DataTemplate views:ConfigurationPage}"
+        FlyoutItemIsVisible="False"
+        Route="ConfigurationPage" />
 </Shell>

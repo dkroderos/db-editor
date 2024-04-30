@@ -5,30 +5,75 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodels="clr-namespace:MerrMail.Maui.ViewModels"
     Title="MerrMail Database Editor"
-    x:DataType="viewmodels:HomeViewModel">
+    x:DataType="viewmodels:HomeViewModel"
+    BackgroundColor="{StaticResource Crust}"
+    Shell.NavBarIsVisible="False">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False" IsVisible="False" />
+    </Shell.BackButtonBehavior>
 
     <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         <Grid
+            Margin="100,0"
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="All"
             ColumnDefinitions="*"
-            RowDefinitions="2*,*">
+            RowDefinitions="Auto,*">
 
             <Label
                 Grid.Row="0"
                 Grid.ColumnSpan="2"
                 FontAttributes="Bold"
                 FontSize="50"
+                HeightRequest="300"
                 HorizontalOptions="Center"
                 Text="MerrMail Database Editor"
-                VerticalOptions="Center" />
-            <Button
-                Grid.Row="1"
-                Grid.Column="1"
-                Margin="10,20,20,20"
-                Command="{Binding GoToEmailContextsCommand}"
-                CornerRadius="30"
-                Text="Edit" />
+                TextColor="{StaticResource Text}"
+                VerticalOptions="Center"
+                VerticalTextAlignment="Center" />
+            <StackLayout Grid.Row="1">
+                <Button
+                    Margin="10"
+                    BackgroundColor="{StaticResource Maroon}"
+                    Command="{Binding SetDatabaseCommand}"
+                    CornerRadius="30"
+                    FontSize="30"
+                    Text="Set Database"
+                    TextColor="{StaticResource Base}" />
+                <Button
+                    Margin="10"
+                    BackgroundColor="{StaticResource Lavender}"
+                    Command="{Binding GoToPasswordCommand}"
+                    CornerRadius="30"
+                    FontSize="30"
+                    Text="Change Database Password"
+                    TextColor="{StaticResource Base}" />
+                <Button
+                    Margin="10"
+                    BackgroundColor="{StaticResource Blue}"
+                    Command="{Binding GoToAddAccountCommand}"
+                    CornerRadius="30"
+                    FontSize="30"
+                    Text="Add Account"
+                    TextColor="{StaticResource Base}" />
+                <Button
+                    Margin="10"
+                    BackgroundColor="{StaticResource Green}"
+                    Command="{Binding GoToEmailContextsCommand}"
+                    CornerRadius="30"
+                    FontSize="30"
+                    Text="Show Email Contexts"
+                    TextColor="{StaticResource Base}" />
+                <Button
+                    Margin="10"
+                    BackgroundColor="{StaticResource Sky}"
+                    Command="{Binding GoToConfigurationCommand}"
+                    CornerRadius="30"
+                    FontSize="30"
+                    Text="Create configuration"
+                    TextColor="{StaticResource Base}" />
+            </StackLayout>
         </Grid>
 
         <StackLayout
